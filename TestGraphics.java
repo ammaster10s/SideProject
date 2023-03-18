@@ -5,6 +5,7 @@ class TestGraphics extends JFrame
     public static void main(String [] args){
         JFrame frame = new JFrame("Test1");
         JLabel below = new JLabel("default");
+        
         frame.add(below , BorderLayout.SOUTH);
         frame.add(new Chessboard());
         MouseMotion movement   = new MouseMotion(below);
