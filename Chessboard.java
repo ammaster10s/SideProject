@@ -3,7 +3,7 @@ import java.awt.*;
 public class Chessboard extends JPanel{
     Chessboard(){} // สร้าง panel ปล่าว
     
-    protected void paintComponent(Graphics g){
+    protected void paintComponent(Graphics g){      //Graphics2d  g2d = (Graphics2d) g;
 
         int[] x = { 0,0,800,800,0};
         int[] y = {0,800,800,0,0};
@@ -40,17 +40,7 @@ public class Chessboard extends JPanel{
         }
     }
 
-class TestBOX
-{
-    public static void main(String [] args){
-        JFrame frame = new JFrame("Test1");
-        frame.add(new Chessboard());
-        frame.setBackground(Color.decode("#e9dcd3"));
-        frame.setVisible(true);
-        frame.setSize(800,800);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-}
+
 
    
 
