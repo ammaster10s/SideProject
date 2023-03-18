@@ -39,17 +39,17 @@ public class Chessboard extends JPanel{
             
             }
         }
-    public void position(){
-            mouseClicked()
-            if (x<101){
+    // public void position(){
+    //         mouseClicked()
+    //         if (x<101){
                 
 
-            }
+    //         }
 
 
 
 
-        }
+    //     }
     }
     
 
