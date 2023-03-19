@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 public class Chessboard extends JPanel{
-    String[] Postion = {"A","B","C","D","E","F","G","H"};
+    // String[] Postion = {"A","B","C","D","E","F","G","H"};
     Chessboard(){} // สร้าง panel ปล่าว
     
     protected void paintComponent(Graphics g){      //Graphics2d  g2d = (Graphics2d) g;
@@ -39,17 +39,7 @@ public class Chessboard extends JPanel{
             
             }
         }
-    // public void position(){
-    //         mouseClicked()
-    //         if (x<101){
-                
-
-    //         }
-
-
-
-
-    //     }
+    // Possible move calculation
     }
     
 
