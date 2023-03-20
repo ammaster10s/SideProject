@@ -3,6 +3,7 @@ import java.awt.*;
 import java.net.URL;
 public class pawn extends JFrame implements Movement{
 
+    static boolean killed = false;
     JPanel panel = new JPanel();
     static ImageIcon img = new ImageIcon("Chess_plt45.svg.png" );
     static JLabel jlPic = new JLabel(img);

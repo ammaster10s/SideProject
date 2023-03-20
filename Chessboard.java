@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 public class Chessboard extends JPanel{
     // String[] Postion = {"A","B","C","D","E","F","G","H"};
+
+    String[][] position = new String[8][8];
+    
     Chessboard(){} // สร้าง panel ปล่าว
     
     protected void paintComponent(Graphics g){      //Graphics2d  g2d = (Graphics2d) g;
