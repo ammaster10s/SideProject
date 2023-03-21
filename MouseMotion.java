@@ -4,7 +4,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 public class MouseMotion implements MouseListener, MouseMotionListener{
-    
+    public static String positionchar;
+    public static int positionnum;
     JLabel labletest;
     String[] Postion = {"A","B","C","D","E","F","G","H"};
     MouseMotion(JLabel labletest){
@@ -20,22 +21,22 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
     }
     @Override
     public void mouseMoved(MouseEvent e) {
-        labletest.setText("The mouse is moved");
-        int x = e.getX();
-        int y = e.getY();
+        // labletest.setText("The mouse is moved");
+        // int x = e.getX();
+        // int y = e.getY();
        
     }
     @Override
     public void mouseClicked(MouseEvent e) {
         // TODO Auto-generated method stub
-        labletest.setText("The mouse is clicked");
+        // labletest.setText("The mouse is clicked");
          
-        int x = e.getX();
-        int y = e.getY();
-        labletest.setText(x+","+y);
-        String positionchar = Postion[x/100];
-        int positionnum = 8-y/100;
-        labletest.setText(positionchar+" "+ positionnum);
+        // int x = e.getX();
+        // int y = e.getY();
+        // labletest.setText(x+","+y);
+        // positionchar = Postion[x/100];
+        // positionnum = 8-y/100;
+        // labletest.setText(positionchar+" "+ positionnum);
         
     }
     @Override
@@ -43,8 +44,8 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
         int x = e.getX();
         int y = e.getY();
         labletest.setText(x+","+y);
-        String positionchar = Postion[x/100];
-        int positionnum = 8-y/100;
+        positionchar = Postion[x/100];
+        positionnum = 8-y/100;
         labletest.setText(positionchar+" "+ positionnum);
     }
     @Override
@@ -52,8 +53,8 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
         int x = e.getX();
         int y = e.getY();
         labletest.setText(x+","+y);
-        String positionchar = Postion[x/100];
-        int positionnum = 8-y/100;
+        positionchar = Postion[x/100];
+        positionnum = 8-y/100;
         labletest.setText(positionchar+" "+ positionnum);
     }
     @Override

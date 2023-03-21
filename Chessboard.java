@@ -42,7 +42,7 @@ public class Chessboard extends JPanel{
             
             }
         }
-    // Possible move calculation
+   
     }
     
 
