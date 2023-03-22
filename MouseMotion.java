@@ -4,8 +4,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 public class MouseMotion implements MouseListener, MouseMotionListener{
-    public static String positionchar;
-    public static int positionnum;
+    public static int positionclickx;
+    public static int positionclicky;
     JLabel labletest;
     String[] Postion = {"A","B","C","D","E","F","G","H"};
     MouseMotion(JLabel labletest){
@@ -44,17 +44,19 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
         int x = e.getX();
         int y = e.getY();
         labletest.setText(x+","+y);
-        positionchar = Postion[x/100];
-        positionnum = 8-y/100;
+        String positionchar = Postion[x/100];
+        int positionnum = 8-y/100;
         labletest.setText(positionchar+" "+ positionnum);
+        positionclickx = Board.positiontopixelx(positionchar);
+        positionclicky = Board.positiontopixely(positionnum);
     }
     @Override
     public void mouseReleased(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
         labletest.setText(x+","+y);
-        positionchar = Postion[x/100];
-        positionnum = 8-y/100;
+        String positionchar = Postion[x/100];
+        int positionnum = 8-y/100;
         labletest.setText(positionchar+" "+ positionnum);
     }
     @Override
