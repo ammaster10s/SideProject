@@ -49,6 +49,7 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
         labletest.setText(positionchar+" "+ positionnum);
         positionclickx = Board.positiontopixelx(positionchar);
         positionclicky = Board.positiontopixely(positionnum);
+        
     }
     @Override
     public void mouseReleased(MouseEvent e) {
