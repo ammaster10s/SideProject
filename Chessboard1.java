@@ -17,8 +17,8 @@ public class Chessboard1 extends JPanel {
 
     private void initializeBoard() {
         for (int i = 0; i < 8; i++) {
-            board[1][i] = "whitePawn";
-            board[6][i] = "blackPawn";
+            board[i][0] = "whitePawn";
+            board[i][7] = "blackPawn";
         }
         // add other pieces to the board
     }

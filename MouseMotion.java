@@ -21,10 +21,10 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
     }
     @Override
     public void mouseMoved(MouseEvent e) {
-        // labletest.setText("The mouse is moved");
-        // int x = e.getX();
-        // int y = e.getY();
-       
+        labletest.setText("The mouse is moved");
+        int x = e.getX();
+        int y = e.getY();
+        labletest.setText(x+","+y);
     }
     @Override
     public void mouseClicked(MouseEvent e) {

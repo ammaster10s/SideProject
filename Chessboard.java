@@ -31,11 +31,11 @@ public class Chessboard extends JPanel
 
     private void initializeBoard(){
         for (int i =0 ; i<8 ; i++){
-            board[0][i]="wpawn" ;
+            board[i][0]="wpawn" ;
             }
-            for (int i =0 ; i<8 ; i++){
-                board[7][i]="bpawn" ;
-                }
+        for (int i =0 ; i<8 ; i++){
+            board[i][7]="bpawn" ;
+            }
     }
 
     public void checklayoutboard(){
@@ -64,16 +64,18 @@ public class Chessboard extends JPanel
         Graphics2D g2d = (Graphics2D) g.create();
         int[] x = { 0,0,800,800,0};
         int[] y = {0,800,800,0,0};
+        Pawn.resizeImages();
+        Pawn.setIcons();
         g2d.setColor(Color.decode("#769656"));
         g2d.drawPolyline(x, y, 5);
-        for (int i=0 ; i<800 ;i+=100){    
-            g2d.setColor(Color.decode("#769656"));                   //Vertical line
-            g2d.drawLine(i, 0, i, 800);
-       }
-        for (int j = 0 ; j<800;j+=100){  
-            g2d.setColor(Color.decode("#769656"));                   //Horizontal
-            g2d.drawLine(0,j,800,j);
-        }
+    //     for (int i=0 ; i<800 ;i+=100){    
+    //         g2d.setColor(Color.decode("#769656"));                   //Vertical line
+    //         g2d.drawLine(i, 0, i, 800);
+    //    }
+    //     for (int j = 0 ; j<800;j+=100){  
+    //         g2d.setColor(Color.decode("#769656"));                   //Horizontal
+    //         g2d.drawLine(0,j,800,j);
+    //     }
         
         // fill black
         g2d.setColor(Color.decode("#769656"));
@@ -91,17 +93,22 @@ public class Chessboard extends JPanel
                 }
             }
             for (int i = 0 ; i<8; i++){
-                for (int y = 0 ; y<8 ; y++){
-                    if(board[i][i]== "wpawn"){
-                        this.add(pawn.jlPicwhite);
+                for (int p = 0 ; p<8 ; p++){
+                    if(board[i][p]== "wpawn"){
+                        // this.add(Pawn.jlPicwhite);
+                        Image image = Pawn.imgwhite.getImage();
+                        g2d.drawImage(image,i*100,p*100,null);
                     }
-                    if(board[i][i]== "bpawn"){
-                        this.add(pawn.jlPicblack).setLocation(i*100, i*100);
-                        g2d.drawImage(pawn.jlPicblack,i*100,i*100);
+                    if(board[i][p]== "bpawn"){
+                        // this.add(Pawn.jlPicblack).setLocation(i*100, j*100);
+                       
+                        Image image = Pawn.imgblack.getImage();
+                        g2d.drawImage(image,i*100,p*100,null);
                 }
              
-           
+                }
             }
+        }
             
         }
    
