@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.util.*;
 import java.awt.*;
+import java.io.*;
 public class Chessboard extends JPanel
 
 {
@@ -38,16 +39,18 @@ public class Chessboard extends JPanel
     }
 
     public void checklayoutboard(){
-        for (int i = 0 ; i<8; i++){
-            for (int y = 0 ; y<8 ; y++){
-                if(board[i][i]== "wpawn"){
-                    this.add(pawn.jlPicwhite);
-                }
-                if(board[i][i]== "bpawn"){
-                    this.add(pawn.jlPicblack);
-            }
-        }
-    }   
+//         g2d = new Chessboard();
+//         for (int i = 0 ; i<8; i++){
+//             for (int y = 0 ; y<8 ; y++){
+//                 if(board[i][i]== "wpawn"){
+//                     this.add(pawn.jlPicwhite);
+//                 }
+//                 if(board[i][i]== "bpawn"){
+//                     this.add(pawn.jlPicblack).setLocation(i*100, i*100);
+//                     g2d.drawImage(pawn.jlPicblack,i*100,i*100);
+//             }
+//         }
+//     }   
 }
 
 
@@ -58,36 +61,44 @@ public class Chessboard extends JPanel
 
 
     protected void paintComponent(Graphics g){      //Graphics2d  g2d = (Graphics2d) g;
-
+        Graphics2D g2d = (Graphics2D) g.create();
         int[] x = { 0,0,800,800,0};
         int[] y = {0,800,800,0,0};
-        g.setColor(Color.decode("#769656"));
-        g.drawPolyline(x, y, 5);
+        g2d.setColor(Color.decode("#769656"));
+        g2d.drawPolyline(x, y, 5);
         for (int i=0 ; i<800 ;i+=100){    
-            g.setColor(Color.decode("#769656"));                   //Vertical line
-            g.drawLine(i, 0, i, 800);
+            g2d.setColor(Color.decode("#769656"));                   //Vertical line
+            g2d.drawLine(i, 0, i, 800);
        }
         for (int j = 0 ; j<800;j+=100){  
-            g.setColor(Color.decode("#769656"));                   //Horizontal
-            g.drawLine(0,j,800,j);
+            g2d.setColor(Color.decode("#769656"));                   //Horizontal
+            g2d.drawLine(0,j,800,j);
         }
         
         // fill black
-        g.setColor(Color.decode("#769656"));
+        g2d.setColor(Color.decode("#769656"));
         for (int j = 0 ; j <8;j++){             //Y axis
             for (int i =0; i<8 ; i++)         //X axis
                 {if (j%2 == 0){
-                    if (i%2!=0){g.fillRect(i*100, j*100, 100, 100);}
+                    if (i%2!=0){g2d.fillRect(i*100, j*100, 100, 100);}
                     }
                    
                 
                 else if (j%2!=0){
                     if(i%2==0){
-                        g.fillRect(i*100, j*100, 100, 100);
+                        g2d.fillRect(i*100, j*100, 100, 100);
                     }
                 }
             }
-
+            for (int i = 0 ; i<8; i++){
+                for (int y = 0 ; y<8 ; y++){
+                    if(board[i][i]== "wpawn"){
+                        this.add(pawn.jlPicwhite);
+                    }
+                    if(board[i][i]== "bpawn"){
+                        this.add(pawn.jlPicblack).setLocation(i*100, i*100);
+                        g2d.drawImage(pawn.jlPicblack,i*100,i*100);
+                }
              
            
             }
