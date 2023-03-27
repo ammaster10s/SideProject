@@ -24,7 +24,7 @@ public class Chessboard extends JPanel
        
         initializeBoard();
         // this.setSize(800,800);
-        checklayoutboard();
+        // checklayoutboard();
     } 
 
 
@@ -38,20 +38,24 @@ public class Chessboard extends JPanel
             }
     }
 
-    public void checklayoutboard(){
-//         g2d = new Chessboard();
-//         for (int i = 0 ; i<8; i++){
-//             for (int y = 0 ; y<8 ; y++){
-//                 if(board[i][i]== "wpawn"){
-//                     this.add(pawn.jlPicwhite);
-//                 }
-//                 if(board[i][i]== "bpawn"){
-//                     this.add(pawn.jlPicblack).setLocation(i*100, i*100);
-//                     g2d.drawImage(pawn.jlPicblack,i*100,i*100);
-//             }
-//         }
-//     }   
-}
+    public String checklayoutboard1(int x ,int y){
+
+        for (int i =0 ;i<9 ;i++){
+            for (int j =0 ;j<9;j++){
+                if (board[x][y] != null){
+                    return board[x][y] ;
+                }
+            }
+        }
+        return null;
+        
+        }
+    
+    public String checkmoveto(int x,int y){
+        if (board[x][y] == null && ){
+
+        }
+    }
 
 
 
@@ -118,7 +122,26 @@ public class Chessboard extends JPanel
         //             board[i][j] = null;}
         //         }
         // }
-        
+        public  boolean posiblemove(int x, int y){
+            int counter = 0;
+            checklayoutboard1(x, y);
+            for (int i=0; i<8; i++) { 
+                for (int j=0; j<8; j++ ) { 
+                    
+                    if (board[i][y] == null){
+                        counter +=1;
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+            }
+            if( counter >0){
+                return true;
+            }
+
+        }
         
     
         public static int positiontopixelx(String postion){

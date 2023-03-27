@@ -45,10 +45,10 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
         int y = e.getY();
         labletest.setText(x+","+y);
         String positionchar = Postion[x/100];
-        int positionnum = 8-y/100;
+        int positionnum = 8-(y/100);
         labletest.setText(positionchar+" "+ positionnum);
-        positionclickx = Board.positiontopixelx(positionchar);
-        positionclicky = Board.positiontopixely(positionnum);
+        int clicklocalx = x/100;
+        int clicklocaly = 8-(y/100);
         
     }
     @Override
@@ -59,6 +59,8 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
         String positionchar = Postion[x/100];
         int positionnum = 8-y/100;
         labletest.setText(positionchar+" "+ positionnum);
+        int releasedlocalx =x/100;
+        int releasedlcoaly =8-(y/100);
     }
     @Override
     public void mouseEntered(MouseEvent e) {
