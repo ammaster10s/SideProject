@@ -1,4 +1,8 @@
+package temp;
 import javax.swing.*;
+
+import Piece;
+
 import java.util.*;
 import java.awt.*;
 

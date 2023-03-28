@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -10,7 +11,47 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
     String[] Postion = {"A","B","C","D","E","F","G","H"};
     MouseMotion(JLabel labletest){
     this.labletest = labletest;}
-   
+    public static String[][] board = new String[8][8];
+
+    JPanel temp ; 
+
+    public void repaint(JPanel temp){
+        this.temp = temp;
+        temp.repaint();
+    }
+
+    
+
+    public String checklayoutboard1(int x ,int y){
+
+        for (int i =0 ;i<9 ;i++){
+            for (int j =0 ;j<9;j++){
+                if (board[x][y] != null){
+                    return board[x][y] ;
+                }
+            }
+        }
+        return null;
+        
+        }
+    
+    public String checkmoveto(int x,int y){
+        if (board[x][y] == null  ){
+
+        }
+        return null;
+    }
+
+    public boolean posiblemove(int x, int y){
+        checklayoutboard1(x, y);
+        int counter = 0;
+        for (int i = 0; i < 8; i++) { 
+            if (board[i][y] == null) {
+                counter += 1;
+            }
+        }
+        return counter > 0;
+    }
     @Override
     public void mouseDragged(MouseEvent e) {
         // labletest.setText("The mouse is Dragged");

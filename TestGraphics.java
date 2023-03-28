@@ -1,13 +1,14 @@
 import javax.swing.*;
+
 import java.awt.*;
 class TestGraphics extends JFrame
 {
     public static void main(String [] args){
         JFrame frame = new JFrame("Test1");
         JLabel below = new JLabel("default");
-        
+        Chessboard game = new Chessboard();
         frame.add(below , BorderLayout.SOUTH);
-        frame.add(new Chessboard());
+        frame.add(game,BorderLayout.CENTER);
         MouseMotion movement   = new MouseMotion(below);
         frame.addMouseListener(movement);
         frame.addMouseMotionListener(movement);
