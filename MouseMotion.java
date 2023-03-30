@@ -12,6 +12,7 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
     MouseMotion(JLabel labletest){
     this.labletest = labletest;}
     public static String[][] board = new String[8][8];
+    private String[][] posiblemove =  new String[8][8];
 
     JPanel temp ; 
 
@@ -41,17 +42,17 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
         }
         return null;
     }
-
-    public boolean posiblemove(int x, int y){
+    // make list of possible move
+    public String posiblemovecal(int x, int y){
         checklayoutboard1(x, y);
-        int counter = 0;
+        // int counter = 0;
         for (int i = 0; i < 8; i++) { 
             if (board[i][y] == null) {
-                counter += 1;
+                posiblemove[i][y] = null;
             }
         }
-        return counter > 0;
-    }
+        return null;
+    }   
     @Override
     public void mouseDragged(MouseEvent e) {
         // labletest.setText("The mouse is Dragged");
@@ -90,8 +91,15 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
         labletest.setText(positionchar+" "+ positionnum);
         int clicklocalx = x/100;
         int clicklocaly = 8-(y/100);
+        if ( checklayoutboard1(clicklocalx, clicklocaly) != null){
+            posiblemovecal(clicklocalx, clicklocaly);
+            
+                
+            }
+        }
+
         
-    }
+    
     @Override
     public void mouseReleased(MouseEvent e) {
         int x = e.getX();
@@ -102,6 +110,9 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
         labletest.setText(positionchar+" "+ positionnum);
         int releasedlocalx =x/100;
         int releasedlcoaly =8-(y/100);
+        if (posiblemove[releasedlcoalx][releasedlocaly]==null){
+            board[releasedlocalx][releasedlocaly]==
+        }
     }
     @Override
     public void mouseEntered(MouseEvent e) {
