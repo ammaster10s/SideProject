@@ -9,6 +9,8 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
     public static int positionclicky;
     JLabel labletest;
     String[] Postion = {"A","B","C","D","E","F","G","H"};
+
+    
     MouseMotion(JLabel labletest){
     this.labletest = labletest;}
     public static String[][] board = new String[8][8];
