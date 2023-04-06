@@ -4,10 +4,14 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
+import java.beans.Visibility;
 
 public class Pawn extends JPanel {
 
-    static boolean killed = false;
+    static boolean diagonal = true;
+    static boolean forward = true;
+    static int Visibility = 1;
+    
     static boolean color = true;
     JPanel panel = new JPanel();
     static ImageIcon imgblack;
@@ -15,6 +19,20 @@ public class Pawn extends JPanel {
 
     static JLabel jlPicblack = new JLabel();
     static JLabel jlPicwhite = new JLabel();
+
+    public Pawn(int x , int y ,boolean Color){
+        if (Color == true){
+            Chessboard.board[x][y] = "wpawn";
+        }
+        else{
+            Chessboard.board[x][y]= "bpawn";
+        }
+
+
+
+    }
+
+
 
 
     public static void resizeImages() {

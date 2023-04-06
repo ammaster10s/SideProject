@@ -9,7 +9,7 @@ class TestGraphics extends JFrame
         Chessboard game = new Chessboard();
         frame.add(below , BorderLayout.SOUTH);
         frame.add(game,BorderLayout.CENTER);
-        MouseMotion movement   = new MouseMotion(below);
+        MouseMotion movement   = new MouseMotion(game , below);
         frame.addMouseListener(movement);
         frame.addMouseMotionListener(movement);
 

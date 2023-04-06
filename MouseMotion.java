@@ -9,12 +9,16 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
     public static int positionclicky;
     JLabel labletest;
     String[] Postion = {"A","B","C","D","E","F","G","H"};
-
+    int clicklocalx ;
+    int clicklocaly ;
+    int releasedlocalx ;
+    int releasedlocaly ;
     
-    MouseMotion(JLabel labletest){
-    this.labletest = labletest;}
-    public static String[][] board = new String[8][8];
-    private String[][] posiblemove =  new String[8][8];
+    MouseMotion(JPanel test ,JLabel labletest){
+    this.labletest = labletest;
+    this.temp = test;}
+    // public static String[][] board = new String[8][8];
+    public static String[][] posiblemove =  new String[8][8];
 
     JPanel temp ; 
 
@@ -29,8 +33,8 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
 
         for (int i =0 ;i<9 ;i++){
             for (int j =0 ;j<9;j++){
-                if (board[x][y] != null){
-                    return board[x][y] ;
+                if (Chessboard.board[x][y] != null){
+                    return Chessboard.board[x][y] ;
                 }
             }
         }
@@ -39,91 +43,65 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
         }
     
     public String checkmoveto(int x,int y){
-        if (board[x][y] == null  ){
+        if (Chessboard.board[x][y] == null  ){
 
         }
         return null;
     }
     // make list of possible move
     public String posiblemovecal(int x, int y){
-        checklayoutboard1(x, y);
-        // int counter = 0;
-        for (int i = 0; i < 8; i++) { 
-            if (board[i][y] == null) {
+        
+        if (checklayoutboard1(x, y) !=null){
+
+
+        for (int i = x; i < 8; i++) { 
+
+
+            if (Chessboard.board[i][y] == null) {
+
+
+
+
                 posiblemove[i][y] = null;
+
             }
         }
+
+    }
         return null;
+
+
     }   
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        // labletest.setText("The mouse is Dragged");
-        // int x = e.getX();
-        // int y = e.getY();
-        // labletest.setText(x+","+y);
-        
-    }
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        labletest.setText("The mouse is moved");
-        int x = e.getX();
-        int y = e.getY();
-        labletest.setText(x+","+y);
-    }
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        // TODO Auto-generated method stub
-        // labletest.setText("The mouse is clicked");
-         
-        // int x = e.getX();
-        // int y = e.getY();
-        // labletest.setText(x+","+y);
-        // positionchar = Postion[x/100];
-        // positionnum = 8-y/100;
-        // labletest.setText(positionchar+" "+ positionnum);
-        
-    }
+
+
     @Override
     public void mousePressed(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
         labletest.setText(x+","+y);
-        String positionchar = Postion[x/100];
-        int positionnum = 8-(y/100);
-        labletest.setText(positionchar+" "+ positionnum);
+        // labletest.setText(positionchar+" "+ positionnum);
         int clicklocalx = x/100;
         int clicklocaly = 8-(y/100);
         if ( checklayoutboard1(clicklocalx, clicklocaly) != null){
             posiblemovecal(clicklocalx, clicklocaly);
-            
-                
+           
             }
         }
 
-        
-    
     @Override
     public void mouseReleased(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
         labletest.setText(x+","+y);
-        String positionchar = Postion[x/100];
-        int positionnum = 8-y/100;
-        labletest.setText(positionchar+" "+ positionnum);
+        
         int releasedlocalx =x/100;
-        int releasedlcoaly =8-(y/100);
-        if (posiblemove[releasedlcoalx][releasedlocaly]==null){
-            board[releasedlocalx][releasedlocaly]==
+        int releasedlocaly =(y/100);
+        labletest.setText(releasedlocalx+" "+ releasedlocaly);
+        if (posiblemove[releasedlocalx][releasedlocaly]==null){
+            Chessboard.board[releasedlocalx][releasedlocaly] = checklayoutboard1(clicklocalx ,clicklocaly);
+            Chessboard.board[clicklocalx][clicklocaly] =null;
+            repaint(temp);
         }
     }
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mouseEntered'");
-    }
-    @Override
-    public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mouseExited'");
-    }
+   
 }
