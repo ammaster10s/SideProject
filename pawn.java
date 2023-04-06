@@ -38,8 +38,8 @@ public class Pawn extends JPanel {
     public static void resizeImages() {
         try {
             // Load original PNG images
-            Image originalBlack = ImageIO.read(new File("Wpawn.png"));
-            Image originalWhite = ImageIO.read(new File("Bpawn.png"));
+            Image originalBlack = ImageIO.read(new File("Bpawn.png"));
+            Image originalWhite = ImageIO.read(new File("Wpawn.png"));
 
             // Resize images to 100x100 pixels
             Image resizedBlack = originalBlack.getScaledInstance(100, 100, Image.SCALE_SMOOTH);

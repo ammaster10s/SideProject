@@ -18,6 +18,6 @@ class TestGraphics extends JFrame
         frame.setSize(800,800);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+       
     }
 }
