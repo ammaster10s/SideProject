@@ -1,4 +1,7 @@
 import javax.swing.*;
+
+import temp.Pawn;
+
 import java.util.*;
 import java.awt.*;
 
@@ -29,12 +32,21 @@ public class Chessboard extends JPanel
     } 
 
     private void initializeBoard(){
+        Piece.resizeImagesandsetIcon("pawn");
+        Piece.resizeImagesandsetIcon("king");
+        for (int i =0; i<2;i++){
+        new Piece(0,4,"king",false);
+        new Piece(7,4,"king",true);
+        }
         for (int i =0 ; i<8 ; i++){
-            board[7][i]="Wpawn" ;
+            new Piece(1, i,"pawn",false) ;
             }
         for (int i =0 ; i<8 ; i++){
-            board[0][i]="Bpawn" ;
+            new Piece(6, i,"pawn",true) ;
             }
+        
+       
+        
     }
 
    
@@ -45,8 +57,8 @@ public class Chessboard extends JPanel
         Graphics2D g2d = (Graphics2D) g.create();
         int[] x = { 0,0,800,800,0};
         int[] y = {0,800,800,0,0};
-        Pawn.resizeImages();
-        Pawn.setIcons();
+        
+        // Piece.setIcons();
         g2d.setColor(color);
         g2d.drawPolyline(x, y, 5);
         
@@ -70,7 +82,7 @@ public class Chessboard extends JPanel
         for (int j = 0 ; j <8 ;j++){
             for (int i =0 ; i<8 ; i ++){
                 g2d.setColor(Color.decode("#ffd692"));
-                if (MouseMotion.posiblemove[j][i] != null){
+                if (Piece.posiblemove[j][i] != null){
                     g2d.fillRect(i*100,j*100,100,100);
                 }
             }
@@ -79,16 +91,26 @@ public class Chessboard extends JPanel
             for (int p = 0 ; p<8 ; p++){
                 if(board[p][i]== "Wpawn"){
                     // this.add(Pawn.jlPicwhite);
-                    Image image = Pawn.imgwhite.getImage();
+                    Image image = Piece.imgwhitepawn.getImage();
                     g2d.drawImage(image,i*100,p*100,null);
                 }
                 if(board[p][i]== "Bpawn"){
                     // this.add(Pawn.jlPicblack).setLocation(i*100, j*100);
                     
-                    Image image = Pawn.imgblack.getImage();
+                    Image image = Piece.imgblackpawn.getImage();
                     g2d.drawImage(image,i*100,p*100,null);
             }
-               
+                if(board[p][i]== "Wking"){
+                    
+                    Image image = Piece.imgwhiteking.getImage();
+                    g2d.drawImage(image,i*100,p*100,null);
+                }
+                if(board[p][i]== "Bking"){
+                  
+                    
+                    Image image = Piece.imgblackking.getImage();
+                    g2d.drawImage(image,i*100,p*100,null);
+            }
             
             }
         }

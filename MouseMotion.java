@@ -13,33 +13,35 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
     int clicklocaly ;
     int releasedlocalx ;
     int releasedlocaly ;
-    String Piece = "";
-    boolean status ;
+    
+    
     MouseMotion(JPanel test ,JLabel labletest){
     this.labletest = labletest;
     this.temp = test;}
     // public static String[][] board = new String[8][8];
-    public static String[][] posiblemove =  new String[8][8];
+    // public static String[][] posiblemove =  new String[8][8];
 
     JPanel temp ; 
 
-    public void repaint(JPanel temp){
+    public void repaint(JPanel temp) {
         this.temp = temp;
-        temp.repaint();
+        temp.getParent().repaint();
+        temp.revalidate();
     }
+    
 
     
 
-    public String checklayoutboard1(int y ,int x){
+    // public String checklayoutboard1(int y ,int x){
 
        
-            if (Chessboard.board[y][x] != null){
-                Piece = Chessboard.board[y][x] ;
+    //         if (Chessboard.board[y][x] != null){
+    //             Piece = Chessboard.board[y][x] ;
                 
-            }
-            else{return( Piece = null);}
-            return null;
-        }
+    //         }
+    //         else{return( Piece = null);}
+    //         return null;
+    //     }
         
         
         
@@ -52,84 +54,87 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
     //     return null;
     // }
     // make list of possible move
-    public String posiblemovecal(int y, int x){ 
+//     public String posiblemovecal(int y, int x){ 
         
       
 
 
         
-            if (Piece.charAt(0)== 'B'){
-                // for (int i = y; i < 8; i++) { 
+//             if (Piece.charAt(0)== 'B'){
+//                 // for (int i = y; i < 8; i++) { 
 
-                if (Chessboard.board[y+1][x] == null) {
-                    posiblemove[y+1][x] = "Posible";
+//                 if (Chessboard.board[y+1][x] == null) {
+//                     posiblemove[y+1][x] = "Posible";
                 
-                }
-                if ( Chessboard.board[y+1][x-1] != null && Chessboard.board[y+1][x-1].charAt(0)=='W'){
-                    posiblemove[y+1][x-1] = "Posible";
+//                 }
+//                 if ( Chessboard.board[y+1][x-1] != null && Chessboard.board[y+1][x-1].charAt(0)=='W'){
+//                     posiblemove[y+1][x-1] = "Posible";
                    
-                }
-                if ( Chessboard.board[y+1][x+1] != null && Chessboard.board[y+1][x+1].charAt(0)=='W'){
-                    posiblemove[y+1][x+1] = "Posible";
-                }             
-    }
-            if (Piece.charAt(0) == 'W'){
-                // for (int i = y; i >=0; i--) {
+//                 }
+//                 if ( Chessboard.board[y+1][x+1] != null && Chessboard.board[y+1][x+1].charAt(0)=='W'){
+//                     posiblemove[y+1][x+1] = "Posible";
+//                 }             
+//     }
+//             if (Piece.charAt(0) == 'W'){
+//                 // for (int i = y; i >=0; i--) {
                      
-                    if (Chessboard.board[y-1][x] == null) {
-                        posiblemove[y-1][x] = "Posible";
-                    }
-                    if ( Chessboard.board[y-1][x-1] != null && Chessboard.board[y-1][x-1].charAt(0)=='B'){
-                        posiblemove[y-1][x-1] = "Posible";
+//                     if (Chessboard.board[y-1][x] == null) {
+//                         posiblemove[y-1][x] = "Posible";
+//                     }
+//                     if ( Chessboard.board[y-1][x-1] != null && Chessboard.board[y-1][x-1].charAt(0)=='B'){
+//                         posiblemove[y-1][x-1] = "Posible";
                        
-                    }
-                    if ( Chessboard.board[y-1][x+1] != null && Chessboard.board[y-1][x+1].charAt(0)=='B'){
-                        posiblemove[y-1][x+1] = "Posible";
+//                     }
+//                     if ( Chessboard.board[y-1][x+1] != null && Chessboard.board[y-1][x+1].charAt(0)=='B'){
+//                         posiblemove[y-1][x+1] = "Posible";
                   
-        // }
-    }
-}    
+//         // }
+//     }
+// }    
      
     
-    repaint(temp);
-    return null;
-}  
+//     repaint(temp);
+//     return null;
+// }  
 
 
     @Override
     public void mousePressed(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
+        Piece check = new Piece();
+        
        
         
         this.clicklocalx = e.getX()/100;
         this.clicklocaly = (e.getY()/100);
         labletest.setText(clicklocaly+" "+clicklocalx);
-        checklayoutboard1(clicklocaly, clicklocalx);
-        if ( Piece != null){
+        check.checklayoutboard(clicklocaly, clicklocalx);
+        
+        if ( Piece.Pieces != null){
             
-            posiblemovecal(clicklocaly, clicklocalx );
+            check.posiblemovecal(clicklocaly, clicklocalx);
             
-            labletest.setText(Piece);
-            
+            labletest.setText(Piece.Pieces);
+            labletest.setText(Chessboard.board[clicklocaly][clicklocalx]);
+            repaint(temp);
             }
-        else{}
+        else{
+            labletest.setText(Chessboard.board[clicklocaly][clicklocalx]);
+        }
         }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
+       
         
         
         int releasedlocalx =e.getX()/100;
         int releasedlocaly =(e.getY()/100);
-        labletest.setText(releasedlocaly+" "+ releasedlocalx);
-        if (posiblemove[releasedlocaly][releasedlocalx]=="Posible" && Piece != null){
-            Chessboard.board[releasedlocaly][releasedlocalx] = Piece;
-            labletest.setText(checklayoutboard1(clicklocaly ,clicklocalx));
+        // labletest.setText(releasedlocaly+" "+ releasedlocalx);
+        if (Piece.posiblemove[releasedlocaly][releasedlocalx]=="Posible" && Piece.Pieces != null){
+            Chessboard.board[releasedlocaly][releasedlocalx] = Piece.Pieces;
+            // labletest.setText(check.checklayoutboard(clicklocaly ,clicklocalx));
             Chessboard.board[clicklocaly][clicklocalx] = null;
-            posiblemove = new String[8][8];
+            Piece.posiblemove = new String[8][8];
 ;
             repaint(temp);
         }

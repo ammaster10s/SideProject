@@ -1,5 +1,13 @@
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 
-public abstract class Piece {
+import java.awt.*;
+
+
+public class Piece extends JPanel {
+	//for future AI
 	public static final int KING = 1;
 	public static final int QUEEN = 2;
 	public static final int ROOK = 3;
@@ -14,24 +22,199 @@ public abstract class Piece {
 	public static final int KNIGHT_VALUE = 3;
 	public static final int BISHOP_VALUE = 3;
 	public static final int PAWN_VALUE = 1;
-		protected int x;
-		protected int y;
-		protected boolean isWhite;
+	protected int x;
+	protected int y;
+	protected boolean color ;
+	int Visibility;
+	static String  Pieces  ;
+
+	static ImageIcon imgblackpawn;
+	static ImageIcon imgwhitepawn;
 	
-		public Piece(int x, int y, boolean isWhite) {
-			this.x = x;
-			this.y = y;
-			this.isWhite = isWhite;
+	static ImageIcon imgblackking;
+	static ImageIcon imgwhiteking;
+
+	// static JLabel jlPicblack = new JLabel();
+	// static JLabel jlPicwhite = new JLabel();
+
+	// 	JPanel panelforpic = new JPanel();
+
+
+		
+	
+	static String[][] posiblemove =  new String[8][8];
+
+		public Piece(){}
+
+		public Piece(int x,int y,String type , boolean Color1){
+			if (type == "pawn"){
+				Pawn(x, y, Color1);}
+			if (type == "king"){
+				King(x ,y, Color1);
+			}
+			}
+		
+
+		public void Pawn(int x , int y ,boolean Color1){
+			if (Color1 == true){
+				Chessboard.board[x][y] = "Wpawn";
+			}
+			else{
+				Chessboard.board[x][y]= "Bpawn";
+			}
+	
+	
+	
 		}
+		public void King(int x , int y ,boolean Color1){
+			
+			if (Color1 == true){
+				Chessboard.board[x][y] = "Wking";
+			}
+			else{
+				Chessboard.board[x][y]= "Bking";
+			}
 	
-		// public abstract List<Move> getPossibleMoves(Board board);
 	
-		public void move(int newX, int newY) {
-			this.x = newX;
-			this.y = newY;
+	
 		}
-	
-		public boolean isWhite() {
-			return isWhite;
+		public  String checklayoutboard(int y ,int x){
+			
+       
+            if (Chessboard.board[y][x] != null){
+                Pieces = Chessboard.board[y][x] ;
+				
+                if  (Pieces.charAt(1) == 'p' || Pieces.charAt(1) == 'k'){
+					this.Visibility =1 ;
+					if ( Pieces.charAt(0) == 'W'){
+						this.color = true;}
+					else  {
+						this.color = false;
+					}
+					}
+				}
+            
+            else{return( Pieces = null);}
+
+            return Pieces;
+
+        }
+
+		public void posiblemovecal(int y, int x) {
+			// if (test != null){
+			if (this.color == false) {
+
+				for (int j = 1; j <=Visibility; j += 1) {
+
+					if (Chessboard.board[y + 1][x] == null) {
+						posiblemove[y + j][x] = "Posible";
+					}
+
+					if (Chessboard.board[y + 1][x - 1] != null && Chessboard.board[y + 1][x - 1].charAt(0) == 'W') {
+						posiblemove[y + j][x - 1] = "Posible";
+					}
+
+					if (Chessboard.board[y + 1][x + 1] != null && Chessboard.board[y + 1][x + 1].charAt(0) == 'W') {
+						posiblemove[y + j][x + 1] = "Posible";
+					}
+				}
+
+			} else if (this.color == true) {
+
+				for (int j =1; j<=Visibility; j+=1){
+
+				if (Chessboard.board[y - 1][x] == null) {
+					posiblemove[y - j][x] = "Posible";
+				}
+
+				if (Chessboard.board[y - 1][x - 1] != null && Chessboard.board[y - 1][x - 1].charAt(0) == 'B') {
+					posiblemove[y - j][x - 1] = "Posible";
+				}
+				if (Chessboard.board[y - 1][x + 1] != null && Chessboard.board[y - 1][x + 1].charAt(0) == 'B') {
+					posiblemove[y - j][x + 1] = "Posible";
+				}
+			}
+		// }
 		}
 	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			public static void resizeImagesandsetIcon(String piece) {
+				
+				if ( piece.charAt(0) == 'k')
+				{try {
+					// Load original PNG images
+					Image originalBlack = ImageIO.read(new File("Bking.png"));
+					Image originalWhite = ImageIO.read(new File("Wking.png"));
+		
+					// Resize images to 100x100 pixels
+					Image resizedBlack = originalBlack.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+					Image resizedWhite = originalWhite.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+		
+					// Create new ImageIcon objects from resized images
+					imgblackking = new ImageIcon(resizedBlack);
+					imgwhiteking = new ImageIcon(resizedWhite);
+					
+					// jlPicblack.setIcon(imgblackking);
+					// jlPicwhite.setIcon(imgwhiteking);
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else if ( piece.charAt(0) == 'p')
+				{try {
+					// Load original PNG images
+					Image originalBlack = ImageIO.read(new File("Bpawn.png"));
+					Image originalWhite = ImageIO.read(new File("Wpawn.png"));
+		
+					// Resize images to 100x100 pixels
+					Image resizedBlack = originalBlack.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+					Image resizedWhite = originalWhite.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+		
+					// Create new ImageIcon objects from resized images
+					imgblackpawn = new ImageIcon(resizedBlack);
+					imgwhitepawn = new ImageIcon(resizedWhite);
+					
+					// jlPicblack.setIcon(imgblackpawn);
+					// jlPicwhite.setIcon(imgwhitepawn);
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				}
+			}
+		
+		
+		
+		
+		
+		}
+		
+
+			
+		
+		
+		
+			

@@ -1,7 +1,10 @@
+package temp;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import Chessboard;
 
 import java.awt.*;
 import java.beans.Visibility;
@@ -20,17 +23,71 @@ public class Pawn extends JPanel {
     static JLabel jlPicblack = new JLabel();
     static JLabel jlPicwhite = new JLabel();
 
+    private static String[][] posiblemove =  new String[8][8];
+
     public Pawn(int x , int y ,boolean Color){
         if (Color == true){
-            Chessboard.board[x][y] = "wpawn";
+            Chessboard.board[x][y] = "Wpawn";
         }
         else{
-            Chessboard.board[x][y]= "bpawn";
+            Chessboard.board[x][y]= "Bpawn";
         }
 
 
 
     }
+    public void posiblemovecal(int y, int x , boolean color){
+    if (color == false){
+        // for (int i = y; i < 8; i++) { 
+
+        if (Chessboard.board[y+1][x] == null) {
+            posiblemove[y+1][x] = "Posible";
+        
+        }
+        // if ( Chessboard.board[y+1][x-1] != null && Chessboard.board[y+1][x-1].charAt(0)=='W'){
+        //     posiblemove[y+1][x-1] = "Posible";
+           
+        // }
+        // if ( Chessboard.board[y+1][x+1] != null && Chessboard.board[y+1][x+1].charAt(0)=='W'){
+        //     posiblemove[y+1][x+1] = "Posible";
+        // }             
+}
+    if (color == true){
+        // for (int i = y; i >=0; i--) {
+             
+            if (Chessboard.board[y-1][x] == null) {
+                posiblemove[y-1][x] = "Posible";
+            }
+    //         if ( Chessboard.board[y-1][x-1] != null && Chessboard.board[y-1][x-1].charAt(0)=='B'){
+    //             posiblemove[y-1][x-1] = "Posible";
+               
+    //         }
+    //         if ( Chessboard.board[y-1][x+1] != null && Chessboard.board[y-1][x+1].charAt(0)=='B'){
+    //             posiblemove[y-1][x+1] = "Posible";
+          
+
+    // }
+    }    
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -60,16 +117,5 @@ public class Pawn extends JPanel {
         jlPicwhite.setIcon(imgwhite);
     }
 
-    public static void main(String [] args){
-        resizeImages();
-        setIcons();
 
-        JFrame test = new JFrame();
-
-        test.add(jlPicblack);
-        test.setVisible(true);
-        test.setLocationRelativeTo(null);
-        test.setSize(100,100);
-
-    }
 }
