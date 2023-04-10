@@ -110,11 +110,11 @@ public class Chessclock extends JPanel implements ActionListener {
                 remainingSeconds--;
                 int remainingMinutes = remainingSeconds / 60;
                 int remainingSecondsDisplay = remainingSeconds % 60;
-                currentLabel.setText(String.format("%02d:%02d", remainingMinutes, remainingSecondsDisplay));
+                player1Label.setText(String.format("%02d:%02d", remainingMinutes, remainingSecondsDisplay));
                 if (remainingSeconds == 0) {
                     JOptionPane.showMessageDialog(null, "Time's up!");
                     timer1.stop();
-                    currentLabel.setText("");
+                    player1Label.setText("");
                 }
             }
         });
@@ -127,29 +127,32 @@ public class Chessclock extends JPanel implements ActionListener {
                 remainingSeconds--;
                 int remainingMinutes = remainingSeconds / 60;
                 int remainingSecondsDisplay = remainingSeconds % 60;
-                currentLabel.setText(String.format("%02d:%02d", remainingMinutes, remainingSecondsDisplay));
+                player2Label.setText(String.format("%02d:%02d", remainingMinutes, remainingSecondsDisplay));
                 if (remainingSeconds == 0) {
                     JOptionPane.showMessageDialog(null, "Time's up!");
                     timer2.stop();
-                    currentLabel.setText("");
+                    player2Label.setText("");
                 }
             }
         });
     
         // Set the initial turn to player 1
         currentLabel = player1Label;
-    
-        // Update the currentLabel based on the turn to move
-        if (MouseMotion.turntomove == false) {
-            currentLabel = player2Label;
+        timer1.start();
+        timer2.stop();
+    }
+  
+    public void checkstatus(boolean check) {
+        if (check == false) {
+            // currentLabel = player2Label;
             timer2.start();
             timer1.stop();
-        } else if (MouseMotion.turntomove == true && clockstart == true) {
-            currentLabel = player1Label;
+        } else if (check == true ) {
+            // currentLabel = player1Label;
             timer1.start();
             timer2.stop();
         }
     }
-    
+
     
 }

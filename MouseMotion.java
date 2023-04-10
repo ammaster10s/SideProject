@@ -76,9 +76,9 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
             repaint(temp);
             if (turntomove == true){
                 turntomove = false;
-                temp1.checkclock();
+                temp1.checkstatus(turntomove);
             } else { turntomove = true;
-                temp1.checkclock();}
+                temp1.checkstatus(turntomove);}
         }
     }
 
