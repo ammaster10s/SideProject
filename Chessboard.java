@@ -34,9 +34,13 @@ public class Chessboard extends JPanel
     private void initializeBoard(){
         Piece.resizeImagesandsetIcon("pawn");
         Piece.resizeImagesandsetIcon("king");
+        Piece.resizeImagesandsetIcon("queen");
         for (int i =0; i<2;i++){
         new Piece(0,4,"king",false);
         new Piece(7,4,"king",true);
+        
+        new Piece(7,3,"queen",true);
+        new Piece(0,3,"queen",false);
         }
         for (int i =0 ; i<8 ; i++){
             new Piece(1, i,"pawn",false) ;
@@ -109,6 +113,18 @@ public class Chessboard extends JPanel
                   
                     
                     Image image = Piece.imgblackking.getImage();
+                    g2d.drawImage(image,i*100,p*100,null);
+            }
+                if(board[p][i]== "Wqueen"){
+                    
+                        
+                    Image image = Piece.imgwhitequeen.getImage();
+                    g2d.drawImage(image,i*100,p*100,null);
+            }
+                if(board[p][i]== "Bqueen"){
+                        
+                            
+                    Image image = Piece.imgblackqueen.getImage();
                     g2d.drawImage(image,i*100,p*100,null);
             }
             

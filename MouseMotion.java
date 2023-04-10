@@ -104,9 +104,9 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
         
        
         
-        this.clicklocalx = e.getX()/100;
-        this.clicklocaly = (e.getY()/100);
-        labletest.setText(clicklocaly+" "+clicklocalx);
+        this.clicklocalx = ((e.getX()-9)/100);
+        this.clicklocaly = ((e.getY()-32)/100);
+        // labletest.setText(clicklocaly+" "+clicklocalx);
         check.checklayoutboard(clicklocaly, clicklocalx);
         
         if ( Piece.Pieces != null){
@@ -114,12 +114,14 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
             check.posiblemovecal(clicklocaly, clicklocalx);
             
             labletest.setText(Piece.Pieces);
-            labletest.setText(Chessboard.board[clicklocaly][clicklocalx]);
-            repaint(temp);
+            // labletest.setText(Chessboard.board[clicklocaly][clicklocalx]);
+            
             }
         else{
-            labletest.setText(Chessboard.board[clicklocaly][clicklocalx]);
+            // labletest.setText(Chessboard.board[clicklocaly][clicklocalx]);
         }
+        repaint(temp);
+       
         }
 
     @Override
@@ -127,8 +129,8 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
        
         
         
-        int releasedlocalx =e.getX()/100;
-        int releasedlocaly =(e.getY()/100);
+        int releasedlocalx =((e.getX()-9)/100);
+        int releasedlocaly =((e.getY()-32)/100);
         // labletest.setText(releasedlocaly+" "+ releasedlocalx);
         if (Piece.posiblemove[releasedlocaly][releasedlocalx]=="Posible" && Piece.Pieces != null){
             Chessboard.board[releasedlocaly][releasedlocalx] = Piece.Pieces;
@@ -138,6 +140,47 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
 ;
             repaint(temp);
         }
+    }
+
+
+
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+       ;
+    }
+
+
+
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+       
+        labletest.setText((e.getX()-9)+" "+(e.getY()-32));
+    }
+
+
+
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+       ;
+    }
+
+
+
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+       ;
+    }
+
+
+
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+       ;
     }
    
 }

@@ -1,5 +1,8 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -33,13 +36,17 @@ public class Piece extends JPanel {
 	
 	static ImageIcon imgblackking;
 	static ImageIcon imgwhiteking;
+	
+	static ImageIcon imgblackqueen;
+	static ImageIcon imgwhitequeen;
 
 	// static JLabel jlPicblack = new JLabel();
 	// static JLabel jlPicwhite = new JLabel();
 
 	// 	JPanel panelforpic = new JPanel();
-
-
+	
+	private static int[] scanXKQ = {-1,0,1,1,1,0,-1,-1};
+	private static int[] scanYKQ = {1,1,1,0,-1,-1,-1,0};
 		
 	
 	static String[][] posiblemove =  new String[8][8];
@@ -51,6 +58,9 @@ public class Piece extends JPanel {
 				Pawn(x, y, Color1);}
 			if (type == "king"){
 				King(x ,y, Color1);
+			}
+			if (type == "queen"){
+				Queen(x ,y, Color1);
 			}
 			}
 		
@@ -78,6 +88,14 @@ public class Piece extends JPanel {
 	
 	
 		}
+		public void Queen(int x , int y ,boolean Color1){
+			if (Color1 == true){
+				Chessboard.board[x][y] = "Wqueen";
+			}
+			else{
+				Chessboard.board[x][y]= "Bqueen";
+			} 
+		}
 		public  String checklayoutboard(int y ,int x){
 			
        
@@ -85,7 +103,15 @@ public class Piece extends JPanel {
                 Pieces = Chessboard.board[y][x] ;
 				
                 if  (Pieces.charAt(1) == 'p' || Pieces.charAt(1) == 'k'){
-					this.Visibility =1 ;
+					this.Visibility =2 ;
+					if ( Pieces.charAt(0) == 'W'){
+						this.color = true;}
+					else  {
+						this.color = false;
+					}
+					}
+				if  (Pieces.charAt(1) == 'q' || Pieces.charAt(1) == 'b'){
+					this.Visibility = 8 ;
 					if ( Pieces.charAt(0) == 'W'){
 						this.color = true;}
 					else  {
@@ -100,65 +126,93 @@ public class Piece extends JPanel {
 
         }
 
-		public void posiblemovecal(int y, int x) {
-			// if (test != null){
+		public void posiblemovecal(int y, int x ) {
+			
 			if (this.color == false) {
-
-				for (int j = 1; j <=Visibility; j += 1) {
-
-					if (Chessboard.board[y + 1][x] == null) {
-						posiblemove[y + j][x] = "Posible";
+				
+				for (int j=0 ;j<Visibility; j+=1){
+					for (int Y:scanYKQ ){
+						for (int X:scanXKQ){
+							try{
+							// 	for (int i = 0; i < skipx.length; i++) {
+							// 		if (skipy[i] == Y && skipx[i] == X) {
+							// 			found = true;
+							// 			break;
+							// 		}
+							// 	}
+							// 	if(found){
+							// 		found = false;
+							// 		continue;
+							// }
+								 {
+									if(Chessboard.board[y+(Y*j)][x+(X*j)] == null ){
+										posiblemove[y+(Y*j)][x+(X*j)]="Posible";
+									} else if(Pieces.charAt(0) == 'B'){
+										if(Chessboard.board[y+(Y*j)][x+(X*j)].charAt(0) == 'W'){
+											posiblemove[y+(Y*j)][x+(X*j)]="Posible";
+											System.out.println(X+" "+ Y);
+											System.out.println("opass");
+											removeElement(X, Y);
+											
+											// counter += 1;
+											// found = true;
+										} else if(Chessboard.board[y+(Y*j)][x+(X*j)].charAt(0) == 'B'){
+											// skipy[counter] = Y;
+											// skipx[counter] = X;
+											// counter += 1;
+											// found = true;
+											System.out.println("1pass");
+											removeElement(X, Y);
+										}
+									} else if(Pieces.charAt(0) == Chessboard.board[y+(Y*j)][x+(X*j)].charAt(0)){
+										// skipy[counter] = Y;
+										// skipx[counter] = X;
+										// counter += 1;
+										// found = true;
+										System.out.println("2pass");
+										removeElement(X, Y);
+									}
+								}
+							} catch (ArrayIndexOutOfBoundsException e){
+								continue;
+							}
+							System.out.println(Arrays.toString(scanXKQ)+""+Arrays.toString(scanYKQ));
+						}
 					}
-
-					if (Chessboard.board[y + 1][x - 1] != null && Chessboard.board[y + 1][x - 1].charAt(0) == 'W') {
-						posiblemove[y + j][x - 1] = "Posible";
-					}
-
-					if (Chessboard.board[y + 1][x + 1] != null && Chessboard.board[y + 1][x + 1].charAt(0) == 'W') {
-						posiblemove[y + j][x + 1] = "Posible";
-					}
-				}
-
-			} else if (this.color == true) {
-
-				for (int j =1; j<=Visibility; j+=1){
-
-				if (Chessboard.board[y - 1][x] == null) {
-					posiblemove[y - j][x] = "Posible";
-				}
-
-				if (Chessboard.board[y - 1][x - 1] != null && Chessboard.board[y - 1][x - 1].charAt(0) == 'B') {
-					posiblemove[y - j][x - 1] = "Posible";
-				}
-				if (Chessboard.board[y - 1][x + 1] != null && Chessboard.board[y - 1][x + 1].charAt(0) == 'B') {
-					posiblemove[y - j][x + 1] = "Posible";
 				}
 			}
-		// }
 		}
-	}
-
+		
 	
 	
 	
-	
-	
-	
-	
-	
-	
+		public static void removeElement(int X, int Y) {
+			int counterX = 0;
+			int counterY = 0;
+			for (int i : scanXKQ) {
+				if (i == X) {
+					scanXKQ[counterX] = 8;
+					counterX += 1;
+					break;
+				} else {
+					scanXKQ[counterX] =i;
+					counterX += 1;
+					
+			}
+			for (int j : scanYKQ) {
+				if (j == Y) {
+					scanYKQ[counterY] = 8;
+					counterY += 1;
+					break;
+				} else {
+					scanYKQ[counterY] = j;
+					counterY += 1;
+				}
+			}
+		}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		}
+				
 		
 			public static void resizeImagesandsetIcon(String piece) {
 				
@@ -204,6 +258,27 @@ public class Piece extends JPanel {
 					e.printStackTrace();
 				}
 				}
+			else if ( piece.charAt(0) == 'q')
+			{try {
+				// Load original PNG images
+				Image originalBlack = ImageIO.read(new File("Bqueen.png"));
+				Image originalWhite = ImageIO.read(new File("Wqueen.png"));
+	
+				// Resize images to 100x100 pixels
+				Image resizedBlack = originalBlack.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+				Image resizedWhite = originalWhite.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+	
+				// Create new ImageIcon objects from resized images
+				imgblackqueen = new ImageIcon(resizedBlack);
+				imgwhitequeen= new ImageIcon(resizedWhite);
+				
+				// jlPicblack.setIcon(imgblackpawn);
+				// jlPicwhite.setIcon(imgwhitepawn);
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			}
 			}
 		
 		
