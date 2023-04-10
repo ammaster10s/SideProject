@@ -14,9 +14,11 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
     int releasedlocalx ;
     int releasedlocaly ;
     static boolean turntomove = true;
-    
-    MouseMotion(JPanel test ,JLabel labletest){
-    this.labletest = labletest;
+    Chessclock temp1 ;
+    MouseMotion(JPanel test, JLabel labletestbelow ,JLabel labletesttop){
+    // this.labletest = labletest;
+    Chessclock test1 = new Chessclock(labletestbelow, labletesttop);
+    temp1 =  test1;
     this.temp = test;}
     // public static String[][] board = new String[8][8];
     // public static String[][] posiblemove =  new String[8][8];
@@ -28,74 +30,7 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
         temp.getParent().repaint();
         temp.revalidate();
     }
-    
-
-    
-
-    // public String checklayoutboard1(int y ,int x){
-
-       
-    //         if (Chessboard.board[y][x] != null){
-    //             Piece = Chessboard.board[y][x] ;
-                
-    //         }
-    //         else{return( Piece = null);}
-    //         return null;
-    //     }
-        
-        
-        
-        
-    
-    // public String checkmoveto(int y,int x){
-    //     if (Chessboard.board[y][x] == null  ){
-
-    //     }
-    //     return null;
-    // }
-    // make list of possible move
-//     public String posiblemovecal(int y, int x){ 
-        
-      
-
-
-        
-//             if (Piece.charAt(0)== 'B'){
-//                 // for (int i = y; i < 8; i++) { 
-
-//                 if (Chessboard.board[y+1][x] == null) {
-//                     posiblemove[y+1][x] = "Posible";
-                
-//                 }
-//                 if ( Chessboard.board[y+1][x-1] != null && Chessboard.board[y+1][x-1].charAt(0)=='W'){
-//                     posiblemove[y+1][x-1] = "Posible";
-                   
-//                 }
-//                 if ( Chessboard.board[y+1][x+1] != null && Chessboard.board[y+1][x+1].charAt(0)=='W'){
-//                     posiblemove[y+1][x+1] = "Posible";
-//                 }             
-//     }
-//             if (Piece.charAt(0) == 'W'){
-//                 // for (int i = y; i >=0; i--) {
-                     
-//                     if (Chessboard.board[y-1][x] == null) {
-//                         posiblemove[y-1][x] = "Posible";
-//                     }
-//                     if ( Chessboard.board[y-1][x-1] != null && Chessboard.board[y-1][x-1].charAt(0)=='B'){
-//                         posiblemove[y-1][x-1] = "Posible";
-                       
-//                     }
-//                     if ( Chessboard.board[y-1][x+1] != null && Chessboard.board[y-1][x+1].charAt(0)=='B'){
-//                         posiblemove[y-1][x+1] = "Posible";
-                  
-//         // }
-//     }
-// }    
-     
-    
-//     repaint(temp);
-//     return null;
-// }  
+ 
 
 
     @Override
@@ -113,7 +48,7 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
             
             check.posiblemovecal(clicklocaly, clicklocalx);
             
-            labletest.setText(Piece.Pieces);
+            // labletest.setText(Piece.Pieces);
             // labletest.setText(Chessboard.board[clicklocaly][clicklocalx]);
             
             }
@@ -137,8 +72,13 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
             // labletest.setText(check.checklayoutboard(clicklocaly ,clicklocalx));
             Chessboard.board[clicklocaly][clicklocalx] = null;
             Piece.posiblemove = new String[8][8];
-;
+
             repaint(temp);
+            if (turntomove == true){
+                turntomove = false;
+                temp1.checkclock();
+            } else { turntomove = true;
+                temp1.checkclock();}
         }
     }
 

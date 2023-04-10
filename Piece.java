@@ -1,16 +1,11 @@
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import java.awt.*;
+
 
 
 public class Piece extends JPanel {
-	//for future AI
+	//for future AI i
 	public static final int KING = 1;
 	public static final int QUEEN = 2;
 	public static final int ROOK = 3;
@@ -25,26 +20,13 @@ public class Piece extends JPanel {
 	public static final int KNIGHT_VALUE = 3;
 	public static final int BISHOP_VALUE = 3;
 	public static final int PAWN_VALUE = 1;
-	protected int x;
-	protected int y;
+	
 	protected boolean color ;
 	int Visibility;
 	static String  Pieces  ;
 
-	static ImageIcon imgblackpawn;
-	static ImageIcon imgwhitepawn;
 	
-	static ImageIcon imgblackking;
-	static ImageIcon imgwhiteking;
-	
-	static ImageIcon imgblackqueen;
-	static ImageIcon imgwhitequeen;
 
-	// static JLabel jlPicblack = new JLabel();
-	// static JLabel jlPicwhite = new JLabel();
-
-	// 	JPanel panelforpic = new JPanel();
-	
 	private static int[] scanXKQ = {-1,0,1,1,1,0,-1,-1};
 	private static int[] scanYKQ = {1,1,1,0,-1,-1,-1,0};
 
@@ -64,6 +46,12 @@ public class Piece extends JPanel {
 			}
 			if (type == "queen"){
 				Queen(x ,y, Color1);
+			}
+			if (type == "bishop"){
+				Bishop(x, y, Color1);
+			}
+			if (type == "rook"){
+				Rook(x ,y, Color1);
 			}
 			}
 		
@@ -99,6 +87,25 @@ public class Piece extends JPanel {
 				Chessboard.board[x][y]= "Bqueen";
 			} 
 		}
+
+		public void Bishop(int x , int y ,boolean Color1){
+			if (Color1 == true){
+				Chessboard.board[x][y] = "Wbishop";
+			}
+			else{
+				Chessboard.board[x][y]= "Bbishop";
+			} 
+		}
+
+		public void Rook(int x , int y ,boolean Color1){
+			if (Color1 == true){
+				Chessboard.board[x][y] = "Wrook";
+			}
+			else{
+				Chessboard.board[x][y]= "Brook";
+			} 
+		}
+
 		public  String checklayoutboard(int y ,int x){
 			
        
@@ -131,9 +138,9 @@ public class Piece extends JPanel {
 
 		public void posiblemovecal(int y, int x ) {
 			
-			if (this.color == false) {
+			if (this.color == false && MouseMotion.turntomove == false) {
 				
-				
+				if (Pieces.charAt(1) == 'k' || Pieces.charAt(1) == 'q'){		//King / Queen
 					for (int i = 0 ; i< scanXKQ.length  ; i++ ){
 						for (int j=1 ;j<=Visibility; j+=1){
 							try{
@@ -146,7 +153,7 @@ public class Piece extends JPanel {
 										posiblemove[y+(scanYKQ[i]*j)][x+(scanXKQ[i]*j)]="Posible";
 										break;
 										}
-									else if(Pieces.charAt(0) == 'k' || Pieces.charAt(0) == 'q'){
+									else if(Pieces.charAt(1) == 'k' || Pieces.charAt(1) == 'q'){
 
 										if(Chessboard.board[y+(scanYKQ[i]*j)][x+(scanXKQ[i]*j)].charAt(0) == 'B'){
 											
@@ -159,30 +166,59 @@ public class Piece extends JPanel {
 							}
 							
 						
+						}
 					}
 				}
+				else if (Pieces.charAt(1) == 'p')	{	//Pawn
+					for (int i = 0 ; i< scanXpawn.length  ; i++ ){
+						for (int j=1 ;j<=Visibility; j+=1){
+							try{
+							
+								 
+									if(Chessboard.board[y+(scanYpawn[i]*j)][x+(scanXpawn[i]*j)] == null  ){
+										if ( scanXpawn[i] == 0){
+											if (y == 1){	
+										posiblemove[y+(scanYpawn[i]*2*j)][x+(scanXpawn[i]*j)]="Posible";}
+										posiblemove[y+(scanYpawn[i]*j)][x+(scanXpawn[i]*j)]="Posible";
+										}
+									}
+									else if(Chessboard.board[y+(scanYpawn[i]*j)][x+(scanXpawn[i]*j)].charAt(0) == 'W'  ){
+										if ( scanXpawn[i] != 0){
+										posiblemove[y+(scanYpawn[i]*j)][x+(scanXpawn[i]*j)]="Posible";
+										break;
+										}
+									}
+							}
+							 catch (ArrayIndexOutOfBoundsException e){
+								continue;
+							}
+							
+						
+						}
+					}
 				}
+			}
 			
-			if (this.color == true) {
+			if (this.color == true && MouseMotion.turntomove == true) {
 				
-				
+				if (Pieces.charAt(1) == 'k' || Pieces.charAt(1) == 'q'){		//King / Queen
 				for (int i = 0 ; i< scanXKQ.length  ; i++ ){
 					for (int j=1 ;j<=Visibility; j+=1){
 						try{
 						
 							 
-							if(Chessboard.board[y-(scanYKQ[i]*j)][x-(scanXKQ[i]*j)] == null ){
-								posiblemove[y-(scanYKQ[i]*j)][x-(scanXKQ[i]*j)]="Posible";}
+							if(Chessboard.board[y-(scanYKQ[i]*j)][x+(scanXKQ[i]*j)] == null ){
+								posiblemove[y-(scanYKQ[i]*j)][x+(scanXKQ[i]*j)]="Posible";}
 
-							else if(Chessboard.board[y-(scanYKQ[i]*j)][x-(scanXKQ[i]*j)].charAt(0) == 'B'){
-								posiblemove[y-(scanYKQ[i]*j)][x-(scanXKQ[i]*j)]="Posible";
+							else if(Chessboard.board[y-(scanYKQ[i]*j)][x+(scanXKQ[i]*j)].charAt(0) == 'B'){
+								posiblemove[y-(scanYKQ[i]*j)][x+(scanXKQ[i]*j)]="Posible";
 								break;
 								
 
 							}
-							else if(Pieces.charAt(0) == 'k' || Pieces.charAt(0) == 'q'){
+							else if(Pieces.charAt(1) == 'k' || Pieces.charAt(1) == 'q'){
 
-								if(Chessboard.board[y-(scanYKQ[i]*j)][x-(scanXKQ[i]*j)].charAt(0) == 'W'){
+								if(Chessboard.board[y-(scanYKQ[i]*j)][x+(scanXKQ[i]*j)].charAt(0) == 'W'){
 									
 									break;
 								}
@@ -191,84 +227,48 @@ public class Piece extends JPanel {
 					 	catch (ArrayIndexOutOfBoundsException e){
 							continue;
 						}
-						System.out.println(Arrays.toString(scanXKQ)+""+Arrays.toString(scanYKQ));
+						
 					
 				}
 			}
 		}
+			else if (Pieces.charAt(1) == 'p')	{	//Pawn
+				for (int i = 0 ; i< scanXpawn.length  ; i++ ){
+					for (int j=1 ;j<=Visibility; j+=1){
+						try{
+						
+							 
+								if(Chessboard.board[y-(scanYpawn[i]*j)][x+(scanXpawn[i]*j)] == null  ){
+									if ( scanXpawn[i] == 0){
+										if (y == 6){	
+									posiblemove[y-(scanYpawn[i]*2*j)][x+(scanXpawn[i]*j)]="Posible";}
+									posiblemove[y-(scanYpawn[i]*j)][x+(scanXpawn[i]*j)]="Posible";
+									}
+								}
+								else if(Chessboard.board[y-(scanYpawn[i]*j)][x+(scanXpawn[i]*j)].charAt(0) == 'B'  ){
+									if ( scanXpawn[i] != 0){
+									posiblemove[y-(scanYpawn[i]*j)][x+(scanXpawn[i]*j)]="Posible";
+									break;
+									}
+								}
+						}
+						 catch (ArrayIndexOutOfBoundsException e){
+							continue;
+						}
+						
+					
+					}
+				}
+			}
+			}
 		}
-		
+	
 		
 	
 		
 				
 		
-			public static void resizeImagesandsetIcon(String piece) {
-				
-				if ( piece.charAt(0) == 'k')
-				{try {
-					// Load original PNG images
-					Image originalBlack = ImageIO.read(new File("Bking.png"));
-					Image originalWhite = ImageIO.read(new File("Wking.png"));
 		
-					// Resize images to 100x100 pixels
-					Image resizedBlack = originalBlack.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-					Image resizedWhite = originalWhite.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-		
-					// Create new ImageIcon objects from resized images
-					imgblackking = new ImageIcon(resizedBlack);
-					imgwhiteking = new ImageIcon(resizedWhite);
-					
-					// jlPicblack.setIcon(imgblackking);
-					// jlPicwhite.setIcon(imgwhiteking);
-					
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			else if ( piece.charAt(0) == 'p')
-				{try {
-					// Load original PNG images
-					Image originalBlack = ImageIO.read(new File("Bpawn.png"));
-					Image originalWhite = ImageIO.read(new File("Wpawn.png"));
-		
-					// Resize images to 100x100 pixels
-					Image resizedBlack = originalBlack.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-					Image resizedWhite = originalWhite.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-		
-					// Create new ImageIcon objects from resized images
-					imgblackpawn = new ImageIcon(resizedBlack);
-					imgwhitepawn = new ImageIcon(resizedWhite);
-					
-					// jlPicblack.setIcon(imgblackpawn);
-					// jlPicwhite.setIcon(imgwhitepawn);
-					
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				}
-			else if ( piece.charAt(0) == 'q')
-			{try {
-				// Load original PNG images
-				Image originalBlack = ImageIO.read(new File("Bqueen.png"));
-				Image originalWhite = ImageIO.read(new File("Wqueen.png"));
-	
-				// Resize images to 100x100 pixels
-				Image resizedBlack = originalBlack.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-				Image resizedWhite = originalWhite.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-	
-				// Create new ImageIcon objects from resized images
-				imgblackqueen = new ImageIcon(resizedBlack);
-				imgwhitequeen= new ImageIcon(resizedWhite);
-				
-				// jlPicblack.setIcon(imgblackpawn);
-				// jlPicwhite.setIcon(imgwhitepawn);
-				
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			}
-			}
 		}
 		
 		

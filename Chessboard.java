@@ -32,13 +32,15 @@ public class Chessboard extends JPanel
     } 
 
     private void initializeBoard(){
-        Piece.resizeImagesandsetIcon("pawn");
-        Piece.resizeImagesandsetIcon("king");
-        Piece.resizeImagesandsetIcon("queen");
+        ImageCreater.resizeImagesandsetIcon("pawn");
+        ImageCreater.resizeImagesandsetIcon("king");
+        ImageCreater.resizeImagesandsetIcon("queen");
+        ImageCreater.resizeImagesandsetIcon("bishop");
+        ImageCreater.resizeImagesandsetIcon("rook");
         for (int i =0; i<2;i++){
         new Piece(0,4,"king",false);
         new Piece(7,4,"king",true);
-        
+
         new Piece(7,3,"queen",true);
         new Piece(0,3,"queen",false);
         }
@@ -48,9 +50,14 @@ public class Chessboard extends JPanel
         for (int i =0 ; i<8 ; i++){
             new Piece(6, i,"pawn",true) ;
             }
-        
-       
-        
+        new Piece(0,0,"rook",false);
+        new Piece(0,7,"rook",false);
+        new Piece(7,7,"rook",true);
+        new Piece(7,0,"rook",true);
+        new Piece(0,2,"bishop",false);
+        new Piece(0,5,"bishop",false);
+        new Piece(7,2,"bishop",true);
+        new Piece(7,5,"bishop",true);
     }
 
    
@@ -95,38 +102,62 @@ public class Chessboard extends JPanel
             for (int p = 0 ; p<8 ; p++){
                 if(board[p][i]== "Wpawn"){
                     // this.add(Pawn.jlPicwhite);
-                    Image image = Piece.imgwhitepawn.getImage();
+                    Image image = ImageCreater.imgwhitepawn.getImage();
                     g2d.drawImage(image,i*100,p*100,null);
                 }
                 if(board[p][i]== "Bpawn"){
                     // this.add(Pawn.jlPicblack).setLocation(i*100, j*100);
                     
-                    Image image = Piece.imgblackpawn.getImage();
+                    Image image = ImageCreater.imgblackpawn.getImage();
                     g2d.drawImage(image,i*100,p*100,null);
             }
                 if(board[p][i]== "Wking"){
                     
-                    Image image = Piece.imgwhiteking.getImage();
+                    Image image = ImageCreater.imgwhiteking.getImage();
                     g2d.drawImage(image,i*100,p*100,null);
                 }
                 if(board[p][i]== "Bking"){
                   
                     
-                    Image image = Piece.imgblackking.getImage();
+                    Image image = ImageCreater.imgblackking.getImage();
                     g2d.drawImage(image,i*100,p*100,null);
             }
                 if(board[p][i]== "Wqueen"){
                     
                         
-                    Image image = Piece.imgwhitequeen.getImage();
+                    Image image = ImageCreater.imgwhitequeen.getImage();
                     g2d.drawImage(image,i*100,p*100,null);
             }
                 if(board[p][i]== "Bqueen"){
                         
                             
-                    Image image = Piece.imgblackqueen.getImage();
+                    Image image = ImageCreater.imgblackqueen.getImage();
                     g2d.drawImage(image,i*100,p*100,null);
             }
+            if(board[p][i]== "Wbishop"){
+                    
+                        
+                Image image = ImageCreater.imgwhitebishop.getImage();
+                g2d.drawImage(image,i*100,p*100,null);
+        }
+            if(board[p][i]== "Bbishop"){
+                    
+                        
+                Image image = ImageCreater.imgblackbishop.getImage();
+                g2d.drawImage(image,i*100,p*100,null);
+        }
+        if(board[p][i]== "Wrook"){
+                    
+                        
+            Image image = ImageCreater.imgwhiterook.getImage();
+            g2d.drawImage(image,i*100,p*100,null);
+    }
+        if(board[p][i]== "Brook"){
+                
+                    
+            Image image = ImageCreater.imgblackrook.getImage();
+            g2d.drawImage(image,i*100,p*100,null);
+    }
             
             }
         }
