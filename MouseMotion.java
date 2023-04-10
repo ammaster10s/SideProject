@@ -13,7 +13,7 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
     int clicklocaly ;
     int releasedlocalx ;
     int releasedlocaly ;
-    
+    static boolean turntomove = true;
     
     MouseMotion(JPanel test ,JLabel labletest){
     this.labletest = labletest;

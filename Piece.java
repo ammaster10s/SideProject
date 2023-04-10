@@ -47,6 +47,9 @@ public class Piece extends JPanel {
 	
 	private static int[] scanXKQ = {-1,0,1,1,1,0,-1,-1};
 	private static int[] scanYKQ = {1,1,1,0,-1,-1,-1,0};
+
+	private static int[] scanXpawn = {-1,0,1};
+	private static int[] scanYpawn = {1,1,1};
 		
 	
 	static String[][] posiblemove =  new String[8][8];
@@ -103,7 +106,7 @@ public class Piece extends JPanel {
                 Pieces = Chessboard.board[y][x] ;
 				
                 if  (Pieces.charAt(1) == 'p' || Pieces.charAt(1) == 'k'){
-					this.Visibility =2 ;
+					this.Visibility =1 ;
 					if ( Pieces.charAt(0) == 'W'){
 						this.color = true;}
 					else  {
@@ -130,88 +133,74 @@ public class Piece extends JPanel {
 			
 			if (this.color == false) {
 				
-				for (int j=0 ;j<Visibility; j+=1){
-					for (int Y:scanYKQ ){
-						for (int X:scanXKQ){
+				
+					for (int i = 0 ; i< scanXKQ.length  ; i++ ){
+						for (int j=1 ;j<=Visibility; j+=1){
 							try{
-							// 	for (int i = 0; i < skipx.length; i++) {
-							// 		if (skipy[i] == Y && skipx[i] == X) {
-							// 			found = true;
-							// 			break;
-							// 		}
-							// 	}
-							// 	if(found){
-							// 		found = false;
-							// 		continue;
-							// }
-								 {
-									if(Chessboard.board[y+(Y*j)][x+(X*j)] == null ){
-										posiblemove[y+(Y*j)][x+(X*j)]="Posible";
-									} else if(Pieces.charAt(0) == 'B'){
-										if(Chessboard.board[y+(Y*j)][x+(X*j)].charAt(0) == 'W'){
-											posiblemove[y+(Y*j)][x+(X*j)]="Posible";
-											System.out.println(X+" "+ Y);
-											System.out.println("opass");
-											removeElement(X, Y);
-											
-											// counter += 1;
-											// found = true;
-										} else if(Chessboard.board[y+(Y*j)][x+(X*j)].charAt(0) == 'B'){
-											// skipy[counter] = Y;
-											// skipx[counter] = X;
-											// counter += 1;
-											// found = true;
-											System.out.println("1pass");
-											removeElement(X, Y);
+							
+								 
+									if(Chessboard.board[y+(scanYKQ[i]*j)][x+(scanXKQ[i]*j)] == null ){
+										posiblemove[y+(scanYKQ[i]*j)][x+(scanXKQ[i]*j)]="Posible";}
+
+									else if(Chessboard.board[y+(scanYKQ[i]*j)][x+(scanXKQ[i]*j)].charAt(0) == 'W'){
+										posiblemove[y+(scanYKQ[i]*j)][x+(scanXKQ[i]*j)]="Posible";
+										break;
 										}
-									} else if(Pieces.charAt(0) == Chessboard.board[y+(Y*j)][x+(X*j)].charAt(0)){
-										// skipy[counter] = Y;
-										// skipx[counter] = X;
-										// counter += 1;
-										// found = true;
-										System.out.println("2pass");
-										removeElement(X, Y);
-									}
-								}
-							} catch (ArrayIndexOutOfBoundsException e){
+									else if(Pieces.charAt(0) == 'k' || Pieces.charAt(0) == 'q'){
+
+										if(Chessboard.board[y+(scanYKQ[i]*j)][x+(scanXKQ[i]*j)].charAt(0) == 'B'){
+											
+											break;
+										}
+									} 
+							}
+							 catch (ArrayIndexOutOfBoundsException e){
 								continue;
 							}
-							System.out.println(Arrays.toString(scanXKQ)+""+Arrays.toString(scanYKQ));
-						}
+							
+						
 					}
 				}
-			}
-		}
-		
-	
-	
-	
-		public static void removeElement(int X, int Y) {
-			int counterX = 0;
-			int counterY = 0;
-			for (int i : scanXKQ) {
-				if (i == X) {
-					scanXKQ[counterX] = 8;
-					counterX += 1;
-					break;
-				} else {
-					scanXKQ[counterX] =i;
-					counterX += 1;
+				}
+			
+			if (this.color == true) {
+				
+				
+				for (int i = 0 ; i< scanXKQ.length  ; i++ ){
+					for (int j=1 ;j<=Visibility; j+=1){
+						try{
+						
+							 
+							if(Chessboard.board[y-(scanYKQ[i]*j)][x-(scanXKQ[i]*j)] == null ){
+								posiblemove[y-(scanYKQ[i]*j)][x-(scanXKQ[i]*j)]="Posible";}
+
+							else if(Chessboard.board[y-(scanYKQ[i]*j)][x-(scanXKQ[i]*j)].charAt(0) == 'B'){
+								posiblemove[y-(scanYKQ[i]*j)][x-(scanXKQ[i]*j)]="Posible";
+								break;
+								
+
+							}
+							else if(Pieces.charAt(0) == 'k' || Pieces.charAt(0) == 'q'){
+
+								if(Chessboard.board[y-(scanYKQ[i]*j)][x-(scanXKQ[i]*j)].charAt(0) == 'W'){
+									
+									break;
+								}
+							} 
+						}
+					 	catch (ArrayIndexOutOfBoundsException e){
+							continue;
+						}
+						System.out.println(Arrays.toString(scanXKQ)+""+Arrays.toString(scanYKQ));
 					
-			}
-			for (int j : scanYKQ) {
-				if (j == Y) {
-					scanYKQ[counterY] = 8;
-					counterY += 1;
-					break;
-				} else {
-					scanYKQ[counterY] = j;
-					counterY += 1;
 				}
 			}
 		}
-		
 		}
+		
+		
+	
+		
 				
 		
 			public static void resizeImagesandsetIcon(String piece) {
@@ -280,12 +269,13 @@ public class Piece extends JPanel {
 			}
 			}
 			}
-		
-		
-		
-		
-		
 		}
+		
+		
+		
+		
+		
+		
 		
 
 			
