@@ -27,8 +27,8 @@ public class ImageCreater extends Chessboard {
         if ( piece.charAt(0) == 'k')
         {try {
             // Load original PNG images
-            Image originalBlack = ImageIO.read(new File("C:\\Users\\Window5555\\Documents\\GitHub\\SideProject\\Pieces\\Bking.png"));
-            Image originalWhite = ImageIO.read(new File("C:\\Users\\Window5555\\Documents\\GitHub\\SideProject\\Pieces\\Wking.png"));
+            Image originalBlack = ImageIO.read(new File("Bking.png"));
+            Image originalWhite = ImageIO.read(new File("Wking.png"));
 
             // Resize images to 100x100 pixels
             Image resizedBlack = originalBlack.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
@@ -48,8 +48,8 @@ public class ImageCreater extends Chessboard {
     else if ( piece.charAt(0) == 'p')
         {try {
             // Load original PNG images
-            Image originalBlack = ImageIO.read(new File("C:\\Users\\Window5555\\Documents\\GitHub\\SideProject\\Pieces\\Bpawn.png"));
-            Image originalWhite = ImageIO.read(new File("C:\\Users\\Window5555\\Documents\\GitHub\\SideProject\\Pieces\\Wpawn.png"));
+            Image originalBlack = ImageIO.read(new File("Bpawn.png"));
+            Image originalWhite = ImageIO.read(new File("Wpawn.png"));
 
             // Resize images to 100x100 pixels
             Image resizedBlack = originalBlack.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
@@ -69,9 +69,8 @@ public class ImageCreater extends Chessboard {
     else if ( piece.charAt(0) == 'q')
     {try {
         // Load original PNG images
-        Image originalBlack = ImageIO.read(new File("C:/Users/Window5555/Documents/GitHub/SideProject/Pieces/Bqueen.png"));
-
-        Image originalWhite = ImageIO.read(new File("C:/Users/Window5555/Documents/GitHub/SideProject/Pieces/Wqueen.png"));
+        Image originalBlack = ImageIO.read(new File("Bqueen.png"));
+        Image originalWhite = ImageIO.read(new File("Wqueen.png"));
 
 
         // Resize images to 100x100 pixels
@@ -92,9 +91,8 @@ public class ImageCreater extends Chessboard {
     else if ( piece.charAt(0) == 'b')
     {try {
         // Load original PNG images
-        Image originalBlack = ImageIO.read(new File("C:/Users/Window5555/Documents/GitHub/SideProject/Pieces/Bbishop.png"));
-
-        Image originalWhite = ImageIO.read(new File("C:/Users/Window5555/Documents/GitHub/SideProject/Pieces/Wbishop.png"));
+        Image originalBlack = ImageIO.read(new File("Bbishop.png"));
+        Image originalWhite = ImageIO.read(new File("Wbishop.png"));
 
 
         // Resize images to 100x100 pixels
@@ -115,9 +113,8 @@ public class ImageCreater extends Chessboard {
     else if ( piece.charAt(0) == 'r')
     {try {
         // Load original PNG images
-        Image originalBlack = ImageIO.read(new File("C:/Users/Window5555/Documents/GitHub/SideProject/Pieces/Brook.png"));
-
-        Image originalWhite = ImageIO.read(new File("C:/Users/Window5555/Documents/GitHub/SideProject/Pieces/Wrook.png"));
+        Image originalBlack = ImageIO.read(new File("Brook.png"));
+        Image originalWhite = ImageIO.read(new File("Wrook.png"));
 
 
         // Resize images to 100x100 pixels
