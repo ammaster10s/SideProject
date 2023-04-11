@@ -9,8 +9,10 @@ public class Chessclock extends JPanel implements ActionListener {
     private JButton blitz5 = new JButton("5|5");
     private JButton Rapid10 = new JButton("10");
 
-    private Timer timer1;
-    private Timer timer2;
+    static int remainingSeconds1;
+    static int remainingSeconds2;
+    private static Timer timer1;
+    private static Timer timer2;
     private JLabel currentLabel;
     private JLabel player1Label;
     private JLabel player2Label;
@@ -19,8 +21,8 @@ public class Chessclock extends JPanel implements ActionListener {
 
     public int minutes2 = 0;
     public int seconds2=0;
-    private int constantsec ;
-    private boolean clockstart ;
+    private static int constantsec ;
+    
 
     public int totalSeconds1;
     public int totalSeconds2;
@@ -96,61 +98,67 @@ public class Chessclock extends JPanel implements ActionListener {
         player2Label.setText(String.format("%02d:%02d", minutes2, seconds2));    
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
         frame.dispose();
-        clockstart = true;
+        
         checkclock();
+        checkstatus(MouseMotion.turntomove);
         
     }
     public void checkclock(){
-        int totalSeconds1 = minutes1 * 60 + seconds1+constantsec;
-        int totalSeconds2 = minutes2 * 60 + seconds2+constantsec;
+        
+        int totalSeconds1 = minutes1 * 60 + seconds1;
+        int totalSeconds2 = minutes2 * 60 + seconds2;
         timer1 = new Timer(1000, new ActionListener() {
-            int remainingSeconds = totalSeconds1;
+            int remainingSeconds1 = totalSeconds1;
     
             public void actionPerformed(ActionEvent evt) {
-                remainingSeconds--;
-                int remainingMinutes = remainingSeconds / 60;
-                int remainingSecondsDisplay = remainingSeconds % 60;
+                remainingSeconds1--;
+                int remainingMinutes = remainingSeconds1 / 60;
+                int remainingSecondsDisplay = remainingSeconds1 % 60;
                 player1Label.setText(String.format("%02d:%02d", remainingMinutes, remainingSecondsDisplay));
-                if (remainingSeconds == 0) {
+                if (remainingSeconds1 == 0) {
                     JOptionPane.showMessageDialog(null, "Time's up!");
                     timer1.stop();
-                    player1Label.setText("");
+                    // player1Label.setText("");
                 }
             }
-        });
+        })
+        ;
+        timer1.stop();
     
     
         timer2 = new Timer(1000, new ActionListener() {
-            int remainingSeconds = totalSeconds2;
+            int remainingSeconds2 = totalSeconds2;
     
             public void actionPerformed(ActionEvent evt) {
-                remainingSeconds--;
-                int remainingMinutes = remainingSeconds / 60;
-                int remainingSecondsDisplay = remainingSeconds % 60;
+                remainingSeconds2--;
+                int remainingMinutes = remainingSeconds2 / 60;
+                int remainingSecondsDisplay = remainingSeconds2 % 60;
                 player2Label.setText(String.format("%02d:%02d", remainingMinutes, remainingSecondsDisplay));
-                if (remainingSeconds == 0) {
+                if (remainingSeconds2 == 0) {
                     JOptionPane.showMessageDialog(null, "Time's up!");
                     timer2.stop();
-                    player2Label.setText("");
+                    // player2Label.setText("");
                 }
             }
         });
-    
+        timer2.stop();
         // Set the initial turn to player 1
-        currentLabel = player1Label;
+       
         timer1.start();
         timer2.stop();
     }
   
-    public void checkstatus(boolean check) {
+    public  static void checkstatus(boolean check) {
         if (check == false) {
             // currentLabel = player2Label;
             timer2.start();
             timer1.stop();
+            remainingSeconds2 += constantsec;
         } else if (check == true ) {
             // currentLabel = player1Label;
             timer1.start();
             timer2.stop();
+            remainingSeconds1 += constantsec;
         }
     }
 

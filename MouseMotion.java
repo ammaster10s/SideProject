@@ -68,18 +68,28 @@ public class MouseMotion implements MouseListener, MouseMotionListener{
         int releasedlocaly =((e.getY()-32)/100);
         // labletest.setText(releasedlocaly+" "+ releasedlocalx);
         if (Piece.posiblemove[releasedlocaly][releasedlocalx]=="Posible" && Piece.Pieces != null){
+
+            if(Piece.Pieces == "Bpawn" && releasedlocaly ==7){
+                Piece.promotion(releasedlocaly, releasedlocalx, turntomove);
+            }
+            else if (Piece.Pieces == "Wpawn" && releasedlocaly ==0){
+                Piece.promotion(releasedlocaly, releasedlocalx, turntomove);
+            }
+            else{
             Chessboard.board[releasedlocaly][releasedlocalx] = Piece.Pieces;
             // labletest.setText(check.checklayoutboard(clicklocaly ,clicklocalx));
             Chessboard.board[clicklocaly][clicklocalx] = null;
+            }
             Piece.posiblemove = new String[8][8];
 
             repaint(temp);
             if (turntomove == true){
                 turntomove = false;
-                temp1.checkstatus(turntomove);
+                Chessclock.checkstatus(turntomove);
             } else { turntomove = true;
-                temp1.checkstatus(turntomove);}
+                Chessclock.checkstatus(turntomove);}
         }
+    
     }
 
 

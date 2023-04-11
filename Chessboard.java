@@ -82,7 +82,7 @@ public class Chessboard extends JPanel
                     if (i%2!=0){g2d.fillRect(i*100, j*100, 100, 100);}
                     }
                    
-                
+               
                 else if (j%2!=0){
                     if(i%2==0){
                         g2d.fillRect(i*100, j*100, 100, 100);
@@ -90,11 +90,28 @@ public class Chessboard extends JPanel
                 }
         }
     }
+        g2d.setColor(Color.decode("#FFFDD0"));
+            for (int j = 0 ; j <8;j++){           
+                for (int i =0; i<8 ; i++)         
+                    {if (j%2 == 0){
+                        if (i%2==0){g2d.fillRect(i*100, j*100, 100, 100);}
+                        }
+                    
+                
+                    else if (j%2!=0){
+                        if(i%2!=0){
+                            g2d.fillRect(i*100, j*100, 100, 100);
+                        }
+                    }
+            }
+        }
         for (int j = 0 ; j <8 ;j++){
             for (int i =0 ; i<8 ; i ++){
                 g2d.setColor(Color.decode("#ffd692"));
                 if (Piece.posiblemove[j][i] != null){
                     g2d.fillRect(i*100,j*100,100,100);
+                    g2d.setColor(Color.decode("#D3D3D3"));
+                    g2d.fillOval(i*100+30,j*100+30,40,40);
                 }
             }
         }    
@@ -164,6 +181,7 @@ public class Chessboard extends JPanel
         for (int i=0 ; i<800 ;i+=100){    
             g2d.setColor(Color.BLACK);                   //Vertical line
             g2d.drawLine(i, 0, i, 800);
+
        }
         for (int j = 0 ; j<800;j+=100){  
             g2d.setColor(Color.BLACK);                   //Horizontal
