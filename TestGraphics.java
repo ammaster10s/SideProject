@@ -26,7 +26,7 @@ public class TestGraphics extends JFrame {
         frame.addMouseListener(movement);
         frame.addMouseMotionListener(movement);
 
-        frame.setBackground(Color.decode("#e9dcd3"));
+        frame.setBackground(Color.decode("#eeeed2"));
         frame.setVisible(true);
         frame.setSize(809, 832); // Use setSize instead of setBounds
         frame.setLocationRelativeTo(null);
