@@ -22,6 +22,9 @@ public class ImageCreater extends Chessboard {
     static ImageIcon imgblackrook;
     static ImageIcon imgwhiterook;
 
+    static ImageIcon imgblackknight;
+    static ImageIcon imgwhiteknight;
+
     public static void resizeImagesandsetIcon(String piece) {
 
         if (piece.charAt(0) == 'k') {
@@ -120,6 +123,27 @@ public class ImageCreater extends Chessboard {
 
                 // jlPicblack.setIcon(imgblackpawn);
                 // jlPicwhite.setIcon(imgwhitepawn);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if (piece.charAt(0) == 'n') {
+            try {
+                // Load original PNG images
+                Image originalBlack = ImageIO.read(new File("Bking.png"));
+                Image originalWhite = ImageIO.read(new File("Wking.png"));
+
+                // Resize images to 100x100 pixels
+                Image resizedBlack = originalBlack.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                Image resizedWhite = originalWhite.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+
+                // Create new ImageIcon objects from resized images
+                imgblackknight = new ImageIcon(resizedBlack);
+                imgwhiteknight = new ImageIcon(resizedWhite);
+
+                // jlPicblack.setIcon(imgblackking);
+                // jlPicwhite.setIcon(imgwhiteking);
 
             } catch (IOException e) {
                 e.printStackTrace();

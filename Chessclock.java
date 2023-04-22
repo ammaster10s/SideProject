@@ -19,17 +19,19 @@ public class Chessclock extends JPanel implements ActionListener {
     
     private JLabel player1Label;
     private JLabel player2Label;
+
     public int minutes1 = 0;
     public int seconds1 = 0;
 
     public int minutes2 = 0;
     public int seconds2 = 0;
-    private static int constantsec;
+    public static int constantsec;
 
     public int totalSeconds1;
     public int totalSeconds2;
 
-    public Chessclock() {
+
+    public Chessclock(JLabel player1 , JLabel player2) {
         this.setLayout(new GridLayout(2, 2));
         this.add(bullet3);
         this.add(blitz3);
@@ -42,18 +44,15 @@ public class Chessclock extends JPanel implements ActionListener {
         Rapid10.addActionListener(this);
 
         // Initialize the player labels
-        player1Label = new JLabel("", SwingConstants.CENTER);
+        // player1Label = new JLabel("", SwingConstants.CENTER);
+        this.player1Label = player1;
+        this.player2Label = player2;
         player1Label.setFont(new Font("Arial", Font.PLAIN, 48));
-        player1Label = new JLabel();
+        // player1Label = new JLabel();
 
-        player2Label = new JLabel("", SwingConstants.CENTER);
+        // player2Label = new JLabel("", SwingConstants.CENTER);
         player2Label.setFont(new Font("Arial", Font.PLAIN, 48));
-        player2Label = new JLabel();
-
-        // Set the initial turn to player 1
-        ;
-
-        
+        // player2Label = new JLabel();
 
     }
 
@@ -66,28 +65,28 @@ public class Chessclock extends JPanel implements ActionListener {
                 seconds1 = 2;
                 minutes2 = 3;
                 seconds2 = 2;
-                constantsec = 2;
+                this.constantsec = 2;
                 break;
             case "3":
                 minutes1 = 3;
                 seconds1 = 0;
                 minutes2 = 3;
                 seconds2 = 0;
-                constantsec = 0;
+                this.constantsec = 0;
                 break;
             case "5|5":
                 minutes1 = 5;
                 seconds1 = 5;
                 minutes2 = 5;
                 seconds2 = 5;
-                constantsec = 5;
+                this.constantsec = 5;
                 break;
             case "10":
                 minutes1 = 10;
                 seconds1 = 0;
                 minutes2 = 10;
                 seconds2 = 0;
-                constantsec = 0;
+                this.constantsec = 0;
                 break;
 
         }
@@ -97,24 +96,6 @@ public class Chessclock extends JPanel implements ActionListener {
         frame.dispose();
 
 
-        JFrame gametime  = new JFrame("Game");
-        JPanel center = new JPanel();
-        gametime.add(player2Label,BorderLayout.NORTH);
-        gametime.add(player1Label, BorderLayout.SOUTH);
-        JButton draw2 = new JButton("Draw");
-        JButton draw1 = new JButton("Draw");
-        JButton resign1  = new JButton("Resgin");
-        JButton resign2 = new JButton("Resign");
-
-        center.setLayout(new GridLayout(2,2));
-        center.add(resign2);
-        center.add(draw2);
-        center.add(resign1);
-        center.add(draw1);
-
-        gametime.add(center,BorderLayout.CENTER);
-        gametime.setVisible(true);
-        gametime.setSize(300,300);
 
         Gamestart = true;
         checkclock();
@@ -162,19 +143,46 @@ public class Chessclock extends JPanel implements ActionListener {
         // Set the initial turn to player 1
        
     }
+    public static void addTimeToTimer1(Timer timer, int secondsToAdd) {
+        ActionListener[] listeners = timer.getActionListeners();
+        for (ActionListener listener : listeners) {
+            if (listener instanceof Chessclock ) {
+                Chessclock timerListener = (Chessclock) listener;
+                Chessclock.remainingSeconds1 += secondsToAdd;
+                break;
+            }
+        }
+    }
+    public static void addTimeToTimer2(Timer timer, int secondsToAdd) {
+        ActionListener[] listeners = timer.getActionListeners();
+        for (ActionListener listener : listeners) {
+            if (listener instanceof Chessclock ) {
+                Chessclock timerListener = (Chessclock) listener;
+                Chessclock.remainingSeconds2 += secondsToAdd;
+                break;
+            }
+        }
+    }
 
-    public static void checkstatus(boolean check) {
-        if (check == false) {
+    public static void checkstatus(boolean check , boolean check2) {
+
+        if (check == true && check2 == true){
+            timer1.stop();
+            timer2.stop();
+        }
+         else if (check == false && check2 == false) {
             // currentLabel = player2Label;
             timer2.start();
             timer1.stop();
-            remainingSeconds2 += constantsec;
-        } else if (check == true) {
+            addTimeToTimer1(timer1,constantsec);
+        } else if (check == true && check2 == false) {
             // currentLabel = player1Label;
             timer1.start();
             timer2.stop();
-            remainingSeconds1 += constantsec;
+            remainingSeconds2 += constantsec;
+            addTimeToTimer2(timer2,constantsec);
         }
+        
     }
 
 }

@@ -36,6 +36,8 @@ public class Piece {
 	private static int[] scanXrook = { 0, 1, 0, -1 };
 	private static int[] scanYrook = { 1, 0, -1, 0 };
 
+	private static int[] scanXknight = {-2,-1,1,2,2,1,-1,-2};
+	private static int[] scanYknight = {1,2,2,1,-1,-2,-2,-1};
 	static String[][] posiblemove = new String[8][8];
 
 	public Piece() {
@@ -241,8 +243,37 @@ public class Piece {
 					}
 				}
 			}
-
 		}
+		 //Knight move need to adjust 
+		// else if (Pieces.charAt(1) == 'n') {
+		// 	for (int i = 0; i < scanXrook.length; i++) {
+		// 		for (int j = 1; j <= Visibility; j += 1) {
+		// 			try {
+
+		// 				if (Chessboard.board[y + (scanYrook[i] * j)][x + (scanXrook[i] * j)] == null) {
+		// 					posiblemove[y + (scanYrook[i] * j)][x + (scanXrook[i] * j)] = "Posible";
+		// 				}
+
+		// 				else if (Chessboard.board[y + (scanYrook[i] * j)][x + (scanXrook[i] * j)]
+		// 						.charAt(0) == 'W') {
+
+		// 					posiblemove[y + (scanYrook[i] * j)][x + (scanXrook[i] * j)] = "Posible";
+		// 					break;
+
+		// 				} else if (Chessboard.board[y + (scanYrook[i] * j)][x + (scanXrook[i] * j)]
+		// 						.charAt(0) == 'B') {
+
+		// 					break;
+		// 				}
+		// 			} catch (ArrayIndexOutOfBoundsException e) {
+		// 				continue;
+		// 			}
+
+		// 		}
+		// 	}
+		// }
+
+		// }
 
 		if (this.color == true && MouseMotion.turntomove == true) {
 
@@ -358,13 +389,13 @@ public class Piece {
 		posiblemove[y][x] = "Check";
 	}
 
-	public static void promotion(int y, int x, boolean color) {
+	public static void promotion(int y, int x, boolean color,int yprev , int xprev) {
 		if (color == true && y == 0) {
 
-			Chessboard.board[y + 1][x] = null;
+			Chessboard.board[yprev][xprev] = null;
 			Chessboard.board[y][x] = "Wqueen";
 		} else if (color == false && y == 7) {
-			Chessboard.board[y - 1][x] = null;
+			Chessboard.board[yprev][xprev] = null;
 			Chessboard.board[y][x] = "Bqueen";
 		}
 	}
