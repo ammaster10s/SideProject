@@ -16,7 +16,7 @@ public class Chessclock extends JPanel implements ActionListener {
 
     private static Timer timer1;
     private static Timer timer2;
-    
+
     private JLabel player1Label;
     private JLabel player2Label;
 
@@ -30,8 +30,7 @@ public class Chessclock extends JPanel implements ActionListener {
     public int totalSeconds1;
     public int totalSeconds2;
 
-
-    public Chessclock(JLabel player1 , JLabel player2) {
+    public Chessclock(JLabel player1, JLabel player2) {
         this.setLayout(new GridLayout(2, 2));
         this.add(bullet3);
         this.add(blitz3);
@@ -95,11 +94,9 @@ public class Chessclock extends JPanel implements ActionListener {
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
         frame.dispose();
 
-
-
         Gamestart = true;
+        Chessboard game = new Chessboard();
         checkclock();
-        
 
     }
 
@@ -141,22 +138,24 @@ public class Chessclock extends JPanel implements ActionListener {
         });
         timer2.stop();
         // Set the initial turn to player 1
-       
+
     }
+
     public static void addTimeToTimer1(Timer timer, int secondsToAdd) {
         ActionListener[] listeners = timer.getActionListeners();
         for (ActionListener listener : listeners) {
-            if (listener instanceof Chessclock ) {
+            if (listener instanceof Chessclock) {
                 Chessclock timerListener = (Chessclock) listener;
                 Chessclock.remainingSeconds1 += secondsToAdd;
                 break;
             }
         }
     }
+
     public static void addTimeToTimer2(Timer timer, int secondsToAdd) {
         ActionListener[] listeners = timer.getActionListeners();
         for (ActionListener listener : listeners) {
-            if (listener instanceof Chessclock ) {
+            if (listener instanceof Chessclock) {
                 Chessclock timerListener = (Chessclock) listener;
                 Chessclock.remainingSeconds2 += secondsToAdd;
                 break;
@@ -164,25 +163,24 @@ public class Chessclock extends JPanel implements ActionListener {
         }
     }
 
-    public static void checkstatus(boolean check , boolean check2) {
+    public static void checkstatus(boolean check, boolean check2) {
 
-        if (check == true && check2 == true){
+        if (check == true && check2 == true) {
             timer1.stop();
             timer2.stop();
-        }
-         else if (check == false && check2 == false) {
+        } else if (check == false && check2 == false) {
             // currentLabel = player2Label;
             timer2.start();
             timer1.stop();
-            addTimeToTimer1(timer1,constantsec);
+            addTimeToTimer1(timer1, constantsec);
         } else if (check == true && check2 == false) {
             // currentLabel = player1Label;
             timer1.start();
             timer2.stop();
             remainingSeconds2 += constantsec;
-            addTimeToTimer2(timer2,constantsec);
+            addTimeToTimer2(timer2, constantsec);
         }
-        
+
     }
 
 }

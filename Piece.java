@@ -1,4 +1,6 @@
 
+import java.time.Period;
+
 import javax.swing.*;
 
 public class Piece {
@@ -36,8 +38,8 @@ public class Piece {
 	private static int[] scanXrook = { 0, 1, 0, -1 };
 	private static int[] scanYrook = { 1, 0, -1, 0 };
 
-	private static int[] scanXknight = {-2,-1,1,2,2,1,-1,-2};
-	private static int[] scanYknight = {1,2,2,1,-1,-2,-2,-1};
+	private static int[] scanXknight = { -2, -1, 1, 2, 2, 1, -1, -2 };
+	private static int[] scanYknight = { 1, 2, 2, 1, -1, -2, -2, -1 };
 	static String[][] posiblemove = new String[8][8];
 
 	public Piece() {
@@ -59,6 +61,9 @@ public class Piece {
 		if (type == "rook") {
 			Rook(x, y, Color1);
 		}
+		if (type == "night") {
+			Knight(x, y, Color1);
+		}
 	}
 
 	public void Pawn(int x, int y, boolean Color1) {
@@ -76,6 +81,16 @@ public class Piece {
 			Chessboard.board[x][y] = "Wking";
 		} else {
 			Chessboard.board[x][y] = "Bking";
+		}
+
+	}
+
+	public void Knight(int x, int y, boolean Color1) {
+
+		if (Color1 == true) {
+			Chessboard.board[x][y] = "Wnight";
+		} else {
+			Chessboard.board[x][y] = "Bnight";
 		}
 
 	}
@@ -125,6 +140,13 @@ public class Piece {
 					this.color = false;
 				}
 			}
+			if (Pieces.charAt(1) == 'n') {
+				if (Pieces.charAt(0) == 'W') {
+					this.color = true;
+				} else {
+					this.color = false;
+				}
+			}
 		}
 
 		else {
@@ -139,7 +161,7 @@ public class Piece {
 
 		if (this.color == false && MouseMotion.turntomove == false) {
 
-			if (Pieces.charAt(1) == 'k' || Pieces.charAt(1) == 'q') { // King / Queen /bishop
+			if (Pieces.charAt(1) == 'k' || Pieces.charAt(1) == 'q') { // King / Queen 
 				for (int i = 0; i < scanXKQ.length; i++) {
 					for (int j = 1; j <= Visibility; j += 1) {
 						try {
@@ -243,37 +265,36 @@ public class Piece {
 					}
 				}
 			}
+
+			else if (Pieces.charAt(1) == 'n') {
+				for (int i = 0; i < scanXknight.length; i++) {
+
+					try {
+
+						if (Chessboard.board[y + (scanYknight[i])][x + (scanXknight[i])] == null) {
+							posiblemove[y + (scanYknight[i])][x + (scanXknight[i])] = "Posible";
+						}
+
+						else if (Chessboard.board[y + (scanYknight[i])][x + (scanXknight[i])]
+								.charAt(0) == 'W') {
+
+							posiblemove[y + (scanYknight[i])][x + (scanXknight[i])] = "Posible";
+							continue;
+
+						} else if (Chessboard.board[y + (scanYknight[i])][x + (scanXknight[i])]
+								.charAt(0) == 'B') {
+
+							continue;
+						}
+					} catch (ArrayIndexOutOfBoundsException e) {
+						continue;
+					}
+
+				}
+
+			}
+
 		}
-		 //Knight move need to adjust 
-		// else if (Pieces.charAt(1) == 'n') {
-		// 	for (int i = 0; i < scanXrook.length; i++) {
-		// 		for (int j = 1; j <= Visibility; j += 1) {
-		// 			try {
-
-		// 				if (Chessboard.board[y + (scanYrook[i] * j)][x + (scanXrook[i] * j)] == null) {
-		// 					posiblemove[y + (scanYrook[i] * j)][x + (scanXrook[i] * j)] = "Posible";
-		// 				}
-
-		// 				else if (Chessboard.board[y + (scanYrook[i] * j)][x + (scanXrook[i] * j)]
-		// 						.charAt(0) == 'W') {
-
-		// 					posiblemove[y + (scanYrook[i] * j)][x + (scanXrook[i] * j)] = "Posible";
-		// 					break;
-
-		// 				} else if (Chessboard.board[y + (scanYrook[i] * j)][x + (scanXrook[i] * j)]
-		// 						.charAt(0) == 'B') {
-
-		// 					break;
-		// 				}
-		// 			} catch (ArrayIndexOutOfBoundsException e) {
-		// 				continue;
-		// 			}
-
-		// 		}
-		// 	}
-		// }
-
-		// }
 
 		if (this.color == true && MouseMotion.turntomove == true) {
 
@@ -381,6 +402,33 @@ public class Piece {
 
 					}
 				}
+			} else if (Pieces.charAt(1) == 'n') {
+				System.out.println("pass");
+				for (int i = 0; i < scanXknight.length; i++) {
+
+					try {
+
+						if (Chessboard.board[y + (scanYknight[i])][x + (scanXknight[i])] == null) {
+							posiblemove[y + (scanYknight[i])][x + (scanXknight[i])] = "Posible";
+						}
+
+						else if (Chessboard.board[y + (scanYknight[i])][x + (scanXknight[i])]
+								.charAt(0) == 'B') {
+
+							posiblemove[y + (scanYknight[i])][x + (scanXknight[i])] = "Posible";
+							continue;
+
+						} else if (Chessboard.board[y + (scanYknight[i])][x + (scanXknight[i])]
+								.charAt(0) == 'W') {
+
+							continue;
+						}
+					} catch (ArrayIndexOutOfBoundsException e) {
+						continue;
+					}
+
+				}
+
 			}
 		}
 	}
@@ -389,7 +437,7 @@ public class Piece {
 		posiblemove[y][x] = "Check";
 	}
 
-	public static void promotion(int y, int x, boolean color,int yprev , int xprev) {
+	public static void promotion(int y, int x, boolean color, int yprev, int xprev) {
 		if (color == true && y == 0) {
 
 			Chessboard.board[yprev][xprev] = null;

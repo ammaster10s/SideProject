@@ -49,11 +49,11 @@ public class ImageCreater extends Chessboard {
             }
         } else if (piece.charAt(0) == 'p') {
             try {
-                // Load original PNG images
+                
                 Image originalBlack = ImageIO.read(new File("Bpawn.png"));
                 Image originalWhite = ImageIO.read(new File("Wpawn.png"));
 
-                // Resize images to 100x100 pixels
+                
                 Image resizedBlack = originalBlack.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
                 Image resizedWhite = originalWhite.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
@@ -61,89 +61,79 @@ public class ImageCreater extends Chessboard {
                 imgblackpawn = new ImageIcon(resizedBlack);
                 imgwhitepawn = new ImageIcon(resizedWhite);
 
-                // jlPicblack.setIcon(imgblackpawn);
-                // jlPicwhite.setIcon(imgwhitepawn);
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if (piece.charAt(0) == 'q') {
             try {
-                // Load original PNG images
+               
                 Image originalBlack = ImageIO.read(new File("Bqueen.png"));
                 Image originalWhite = ImageIO.read(new File("Wqueen.png"));
 
-                // Resize images to 100x100 pixels
+                
                 Image resizedBlack = originalBlack.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
                 Image resizedWhite = originalWhite.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
-                // Create new ImageIcon objects from resized images
+               
                 imgblackqueen = new ImageIcon(resizedBlack);
                 imgwhitequeen = new ImageIcon(resizedWhite);
 
-                // jlPicblack.setIcon(imgblackpawn);
-                // jlPicwhite.setIcon(imgwhitepawn);
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if (piece.charAt(0) == 'b') {
             try {
-                // Load original PNG images
+               
                 Image originalBlack = ImageIO.read(new File("Bbishop.png"));
                 Image originalWhite = ImageIO.read(new File("Wbishop.png"));
 
-                // Resize images to 100x100 pixels
+               
                 Image resizedBlack = originalBlack.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
                 Image resizedWhite = originalWhite.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
-                // Create new ImageIcon objects from resized images
+        
                 imgblackbishop = new ImageIcon(resizedBlack);
                 imgwhitebishop = new ImageIcon(resizedWhite);
 
-                // jlPicblack.setIcon(imgblackpawn);
-                // jlPicwhite.setIcon(imgwhitepawn);
+
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if (piece.charAt(0) == 'r') {
             try {
-                // Load original PNG images
+             
                 Image originalBlack = ImageIO.read(new File("Brook.png"));
                 Image originalWhite = ImageIO.read(new File("Wrook.png"));
 
-                // Resize images to 100x100 pixels
+             
                 Image resizedBlack = originalBlack.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
                 Image resizedWhite = originalWhite.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
-                // Create new ImageIcon objects from resized images
+              
                 imgblackrook = new ImageIcon(resizedBlack);
                 imgwhiterook = new ImageIcon(resizedWhite);
 
-                // jlPicblack.setIcon(imgblackpawn);
-                // jlPicwhite.setIcon(imgwhitepawn);
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        else if (piece.charAt(0) == 'n') {
+        } else if (piece.charAt(0) == 'n') {
             try {
-                // Load original PNG images
-                Image originalBlack = ImageIO.read(new File("Bking.png"));
-                Image originalWhite = ImageIO.read(new File("Wking.png"));
+             
+                Image originalBlack = ImageIO.read(new File("Bnight.png"));
+                Image originalWhite = ImageIO.read(new File("Wnight.png"));
 
-                // Resize images to 100x100 pixels
+            
                 Image resizedBlack = originalBlack.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
                 Image resizedWhite = originalWhite.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
-                // Create new ImageIcon objects from resized images
+            
                 imgblackknight = new ImageIcon(resizedBlack);
                 imgwhiteknight = new ImageIcon(resizedWhite);
 
-                // jlPicblack.setIcon(imgblackking);
-                // jlPicwhite.setIcon(imgwhiteking);
 
             } catch (IOException e) {
                 e.printStackTrace();
