@@ -118,7 +118,7 @@ public class MouseMotion implements MouseListener, MouseMotionListener, ActionLi
     @Override
     public void mouseMoved(MouseEvent e) {
 
-        labletest.setText((int)(e.getX() - 9) + " " + (e.getY() - 32));
+        labletest.setText((int)(e.getX() - 9) + " " + (int)(e.getY() - 32));
     }
 
     @Override
