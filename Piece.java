@@ -5,20 +5,20 @@ import javax.swing.*;
 
 public class Piece {
 	// for future AI i
-	public static final int KING = 1;
-	public static final int QUEEN = 2;
-	public static final int ROOK = 3;
-	public static final int KNIGHT = 4;
-	public static final int BISHOP = 5;
-	public static final int PAWN = 6;
+	// public static final int KING = 1;
+	// public static final int QUEEN = 2;
+	// public static final int ROOK = 3;
+	// public static final int KNIGHT = 4;
+	// public static final int BISHOP = 5;
+	// public static final int PAWN = 6;
 
 	// constant values for the pieces
-	public static final int KING_VALUE = 1000000;
-	public static final int QUEEN_VALUE = 9;
-	public static final int ROOK_VALUE = 5;
-	public static final int KNIGHT_VALUE = 3;
-	public static final int BISHOP_VALUE = 3;
-	public static final int PAWN_VALUE = 1;
+	// public static final int KING_VALUE = 1000000;
+	// public static final int QUEEN_VALUE = 9;
+	// public static final int ROOK_VALUE = 5;
+	// public static final int KNIGHT_VALUE = 3;
+	// public static final int BISHOP_VALUE = 3;
+	// public static final int PAWN_VALUE = 1;
 
 	protected boolean color;
 	int Visibility;
@@ -203,7 +203,7 @@ public class Piece {
 							} else if (Chessboard.board[y + (scanYpawn[i] * j)][x + (scanXpawn[i] * j)]
 									.charAt(0) == 'W') {
 								if (scanXpawn[i] != 0) {
-									posiblemove[y + (scanYpawn[i] * j)][x + (scanXpawn[i] * j)] = "Posible";
+									posiblemove[y + (scanYpawn[i] * j)][x + (scanXpawn[i] * j)] = "Capture";
 									break;
 								}
 							}

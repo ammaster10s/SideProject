@@ -26,6 +26,7 @@ public class MouseMotion implements MouseListener, MouseMotionListener, ActionLi
     boolean draw2accept;
 
     public boolean playerwin;
+    public boolean gameends;
 
     MouseMotion(JPanel test, JLabel labletest, JButton resign1, JButton resign2, JButton draw1, JButton draw2) {
         this.labletest = labletest;
@@ -55,7 +56,7 @@ public class MouseMotion implements MouseListener, MouseMotionListener, ActionLi
         this.clicklocaly = ((e.getY() - 32) / 100);
 
         check.checklayoutboard(clicklocaly, clicklocalx);
-        if (Chessclock.Gamestart) {
+        if (Chessclock.Gamestart && gameends != true) {
             if (Piece.Pieces != null) {
 
                 if (Piece.Pieces.charAt(0) == 'B' && turntomove == false) {
@@ -77,7 +78,7 @@ public class MouseMotion implements MouseListener, MouseMotionListener, ActionLi
 
             }
         } else {
-            labletest.setText("Set the time!");
+            labletest.setText("Please Follow the rules");
         }
     }
 
@@ -86,7 +87,8 @@ public class MouseMotion implements MouseListener, MouseMotionListener, ActionLi
 
         int releasedlocalx = ((e.getX() - 9) / 100);        //implicit casting
         int releasedlocaly = ((e.getY() - 32) / 100);       //implicit casting
-        if (Piece.posiblemove[releasedlocaly][releasedlocalx] == "Posible" && Piece.Pieces != null) {
+        if (Piece.posiblemove[releasedlocaly][releasedlocalx] == "Posible" || Piece.posiblemove[releasedlocaly][releasedlocalx] =="Capture") {
+            if(Piece.Pieces != null){
             if (Piece.Pieces == "Bpawn" && releasedlocaly == 7) {
                 Piece.promotion(releasedlocaly, releasedlocalx, turntomove, clicklocaly, clicklocalx);
             } else if (Piece.Pieces == "Wpawn" && releasedlocaly == 0) {
@@ -107,6 +109,7 @@ public class MouseMotion implements MouseListener, MouseMotionListener, ActionLi
                 Chessclock.checkstatus(turntomove, false);
             }
         }
+    }
 
     }
 
@@ -140,9 +143,11 @@ public class MouseMotion implements MouseListener, MouseMotionListener, ActionLi
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == resign1) {
             playerwin = false;
+            gameends = true;
             Chessboard.checkwincodition(playerwin, "resign");
         } else if (e.getSource() == resign2) {
             playerwin = true;
+            gameends = true;
             Chessboard.checkwincodition(playerwin, "resign");
         } else if (e.getSource() == draw1) {
 
@@ -153,6 +158,7 @@ public class MouseMotion implements MouseListener, MouseMotionListener, ActionLi
                 Chessboard.checkwincodition(playerwin, "draw");
                 draw1accept = false;
                 draw2accept = false;
+                gameends = true;
             }
 
         } else if (e.getSource() == draw2) {
@@ -164,6 +170,8 @@ public class MouseMotion implements MouseListener, MouseMotionListener, ActionLi
                 Chessboard.checkwincodition(playerwin, "draw");
                 draw2accept = false;
                 draw1accept = false;
+                gameends = true;
+
             }
         }
     }
