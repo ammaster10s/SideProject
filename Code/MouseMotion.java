@@ -1,3 +1,5 @@
+package Code;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +30,7 @@ public class MouseMotion implements MouseListener, MouseMotionListener, ActionLi
     public boolean playerwin;
     public boolean gameends;
 
-    MouseMotion(JPanel test, JLabel labletest, JButton resign1, JButton resign2, JButton draw1, JButton draw2) {
+    public MouseMotion(JPanel test, JLabel labletest, JButton resign1, JButton resign2, JButton draw1, JButton draw2) {
         this.labletest = labletest;
         this.temp = test;
         this.resign1 = resign1;
@@ -85,8 +87,8 @@ public class MouseMotion implements MouseListener, MouseMotionListener, ActionLi
     @Override
     public void mouseReleased(MouseEvent e) {
 
-        int releasedlocalx = ((e.getX() - 9) / 100);        //implicit casting
-        int releasedlocaly = ((e.getY() - 32) / 100);       //implicit casting
+        int releasedlocalx = ((e.getX() - 9) / 100);        //implicit casting make it all int
+        int releasedlocaly = ((e.getY() - 32) / 100);       //implicit casting make it all int
         if (Piece.posiblemove[releasedlocaly][releasedlocalx] == "Posible" || Piece.posiblemove[releasedlocaly][releasedlocalx] =="Capture") {
             if(Piece.Pieces != null){
             if (Piece.Pieces == "Bpawn" && releasedlocaly == 7) {
@@ -121,7 +123,7 @@ public class MouseMotion implements MouseListener, MouseMotionListener, ActionLi
     @Override
     public void mouseMoved(MouseEvent e) {
 
-        labletest.setText((int)(e.getX() - 9) + " " + (int)(e.getY() - 32));
+        labletest.setText((int)(e.getX() - 9) + " " + (int)(e.getY() - 32));    // explicit convert
     }
 
     @Override
