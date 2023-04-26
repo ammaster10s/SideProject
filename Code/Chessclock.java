@@ -1,3 +1,5 @@
+package Code;
+
 import javax.swing.JPanel;
 import java.awt.*;
 import javax.swing.*;
