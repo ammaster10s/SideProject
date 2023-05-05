@@ -8,6 +8,7 @@ import javax.swing.*;
 
 import java.awt.*;
 
+@SuppressWarnings("serial")
 public class ImageCreater extends Chessboard {
     static ImageIcon imgblackpawn;
     static ImageIcon imgwhitepawn;
@@ -28,12 +29,12 @@ public class ImageCreater extends Chessboard {
     static ImageIcon imgwhiteknight;
 
     public static void resizeImagesandsetIcon(String piece) {
-
+       
         if (piece.charAt(0) == 'k') {
             try {
                 // Load original PNG images
-                Image originalBlack = ImageIO.read(new File("/Users/ammaster10/Documents/GitHub/SideProject/Materials/Bking.png"));
-                Image originalWhite = ImageIO.read(new File("/Users/ammaster10/Documents/GitHub/SideProject/Materials/Wking.png"));
+                Image originalBlack = ImageIO.read(new File("/Users/ammaster10/Downloads/chessgame_6522780376/src/Materials/Bking.png"));
+                Image originalWhite = ImageIO.read(new File("/Users/ammaster10/Downloads/chessgame_6522780376/src/Materials/Bking.png"));
 
                 // Resize images to 100x100 pixels
                 Image resizedBlack = originalBlack.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
@@ -52,8 +53,8 @@ public class ImageCreater extends Chessboard {
         } else if (piece.charAt(0) == 'p') {
             try {
                 
-                Image originalBlack = ImageIO.read(new File("/Users/ammaster10/Documents/GitHub/SideProject/Materials/Bpawn.png"));
-                Image originalWhite = ImageIO.read(new File("/Users/ammaster10/Documents/GitHub/SideProject/Materials/Wpawn.png"));
+                Image originalBlack = ImageIO.read(new File("/Users/ammaster10/Downloads/chessgame_6522780376/src/Materials/Bpawn.png"));
+                Image originalWhite = ImageIO.read(new File("/Users/ammaster10/Downloads/chessgame_6522780376/src/Materials/Wpawn.png"));
 
                 
                 Image resizedBlack = originalBlack.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
@@ -70,8 +71,8 @@ public class ImageCreater extends Chessboard {
         } else if (piece.charAt(0) == 'q') {
             try {
                
-                Image originalBlack = ImageIO.read(new File("/Users/ammaster10/Documents/GitHub/SideProject/Materials/Bqueen.png"));
-                Image originalWhite = ImageIO.read(new File("/Users/ammaster10/Documents/GitHub/SideProject/Materials/Wqueen.png"));
+                Image originalBlack = ImageIO.read(new File("/Users/ammaster10/Downloads/chessgame_6522780376/src/Materials/Bqueen.png"));
+                Image originalWhite = ImageIO.read(new File("/Users/ammaster10/Downloads/chessgame_6522780376/src/Materials/Wqueen.png"));
 
                 
                 Image resizedBlack = originalBlack.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
@@ -88,8 +89,8 @@ public class ImageCreater extends Chessboard {
         } else if (piece.charAt(0) == 'b') {
             try {
                
-                Image originalBlack = ImageIO.read(new File("/Users/ammaster10/Documents/GitHub/SideProject/Materials/Bbishop.png"));
-                Image originalWhite = ImageIO.read(new File("/Users/ammaster10/Documents/GitHub/SideProject/Materials/Wbishop.png"));
+                Image originalBlack = ImageIO.read(new File("/Users/ammaster10/Downloads/chessgame_6522780376/src/Materials/Bbishop.png"));
+                Image originalWhite = ImageIO.read(new File("/Users/ammaster10/Downloads/chessgame_6522780376/src/Materials/Wbishop.png"));
 
                
                 Image resizedBlack = originalBlack.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
@@ -107,8 +108,8 @@ public class ImageCreater extends Chessboard {
         } else if (piece.charAt(0) == 'r') {
             try {
              
-                Image originalBlack = ImageIO.read(new File("/Users/ammaster10/Documents/GitHub/SideProject/Materials/Brook.png"));
-                Image originalWhite = ImageIO.read(new File("/Users/ammaster10/Documents/GitHub/SideProject/Materials/Wrook.png"));
+                Image originalBlack = ImageIO.read(new File("/Users/ammaster10/Downloads/chessgame_6522780376/src/Materials/Bbishop.png"));
+                Image originalWhite = ImageIO.read(new File("/Users/ammaster10/Downloads/chessgame_6522780376/src/Materials/Wrook.png"));
 
              
                 Image resizedBlack = originalBlack.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
@@ -125,8 +126,8 @@ public class ImageCreater extends Chessboard {
         } else if (piece.charAt(0) == 'n') {
             try {
              
-                Image originalBlack = ImageIO.read(new File("/Users/ammaster10/Documents/GitHub/SideProject/Materials/Bnight.png"));
-                Image originalWhite = ImageIO.read(new File("/Users/ammaster10/Documents/GitHub/SideProject/Materials/Wnight.png"));
+                Image originalBlack = ImageIO.read(new File("/Users/ammaster10/Downloads/chessgame_6522780376/src/Materials/Bnight.png"));
+                Image originalWhite = ImageIO.read(new File("/Users/ammaster10/Downloads/chessgame_6522780376/src/Materials/Wnight.png"));
 
             
                 Image resizedBlack = originalBlack.getScaledInstance(100, 100, Image.SCALE_SMOOTH);

@@ -54,8 +54,8 @@ public class MouseMotion implements MouseListener, MouseMotionListener, ActionLi
     public void mousePressed(MouseEvent e) {
         Piece check = new Piece();
 
-        this.clicklocalx = ((e.getX() - 9) / 100);
-        this.clicklocaly = ((e.getY() - 32) / 100);
+        this.clicklocalx = (Math.abs((e.getX() - 9) / 100));
+        this.clicklocaly = (Math.abs((e.getY() - 32) / 100));
 
         check.checklayoutboard(clicklocaly, clicklocalx);
         if (Chessclock.Gamestart && gameends != true) {
@@ -123,7 +123,7 @@ public class MouseMotion implements MouseListener, MouseMotionListener, ActionLi
     @Override
     public void mouseMoved(MouseEvent e) {
 
-        labletest.setText((int)(e.getX() - 9) + " " + (int)(e.getY() - 32));    // explicit convert
+        labletest.setText((double)(int)(e.getX() - 9) + " " + (double)(int)(e.getY() - 32));    // explicit convert
     }
 
     @Override

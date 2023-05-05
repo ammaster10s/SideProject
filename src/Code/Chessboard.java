@@ -1,6 +1,7 @@
 package Code;
 import javax.swing.*;
 import java.awt.*;
+// @SuppressWarnings("serial")
 public class Chessboard extends JPanel
 
 {

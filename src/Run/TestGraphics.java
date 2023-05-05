@@ -1,5 +1,9 @@
-package Code;
+package Run;
 import javax.swing.*;
+
+import Code.Chessboard;
+import Code.Chessclock;
+import Code.MouseMotion;
 
 import java.awt.*;
 
