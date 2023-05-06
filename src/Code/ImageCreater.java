@@ -34,7 +34,7 @@ public class ImageCreater extends Chessboard {
             try {
                 // Load original PNG images
                 Image originalBlack = ImageIO.read(new File("/Users/ammaster10/Downloads/chessgame_6522780376/src/Materials/Bking.png"));
-                Image originalWhite = ImageIO.read(new File("/Users/ammaster10/Downloads/chessgame_6522780376/src/Materials/Bking.png"));
+                Image originalWhite = ImageIO.read(new File("/Users/ammaster10/Downloads/chessgame_6522780376/src/Materials/Wking.png"));
 
                 // Resize images to 100x100 pixels
                 Image resizedBlack = originalBlack.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
